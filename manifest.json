@@ -20,7 +20,7 @@
    },
    "manifest_version": 3,
 
-   "name": "ViBooot",
+   "name": "vRevamp",
    "oauth2": {
       "client_id": "102739538495-lqud9ruvqs4a6jug1fada5h9uu9acpmk.apps.googleusercontent.com",
       "scopes": [ "https://www.googleapis.com/auth/calendar" ]
