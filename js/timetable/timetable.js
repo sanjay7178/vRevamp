@@ -40,8 +40,7 @@ chrome.runtime.onMessage.addListener((request) => {
     if (request.message === "timetable_view_page") {
         try {
             // auto fetch the details of the current semester 
-            const chooseSemesterSearchBox = document.getElementById("semesterSubId");
-            chooseSemesterSearchBox.selectedIndex = 1; // select the recent semester
+            chooseCurrentSemester();
             const timeTableDiv = document.getElementById("loadMyFragment");
             const timeTableDivObserver = new MutationObserver((mutationsList, observer) => change_time_table());
             timeTableDivObserver.observe(timeTableDiv, MutationObserverConfig);
