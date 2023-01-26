@@ -112,21 +112,16 @@ chrome.downloads.onDeterminingFilename.addListener((item, suggest) => {
 chrome.webRequest.onCompleted.addListener(
   (details) => {
     let link = details["url"];
-    console.log("link", link);
     time_last = new Date();
     set_time_last(time_last);
     if (link.indexOf("doStudentMarkView") !== -1) {
       returnMessage("mark_view_page");
     }
     else if (link.indexOf("StudentTimeTable") !== -1) {
-      console.log("Working ...s");
       returnMessage("timetable_view_page");
     }
     else if (link.indexOf("processViewStudentAttendance") !== -1 || link.indexOf("processBackAttendanceDetails") !== -1) {
       returnMessage("view_attendance");
-    }
-    else if (link.indexOf("vtop/assets/img/favicon.ico") !== -1 || link.indexOf("menu.js") !== -1) {
-      returnMessage("nav_bar_change");
     }
     else if (link.indexOf("processViewStudentCourseDetail") !== -1) {
       returnMessage("course_page_change");

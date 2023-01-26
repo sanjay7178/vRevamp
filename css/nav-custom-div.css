@@ -1,0 +1,30 @@
+.nav-custom-div {
+  overflow-x: scroll;
+  overflow-y: none;
+  padding: 10px;
+  margin: 0.2rem;
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  max-height: 45px; /* More than this will cause issues with hamburger */
+}
+
+#menu-toggle.box{
+    margin-bottom: 0px !important;
+    margin-left: .5rem;
+}
+
+.btnItem {
+  size: 1.2ch;
+  color: white;
+  margin: 0.5rem;
+  height: 100%;
+  transition: 0.3s;
+}
+
+.btnItem:hover {
+  color: #afafaf;
+  text-decoration: dashed;
+}
