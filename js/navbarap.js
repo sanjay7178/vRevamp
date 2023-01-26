@@ -7,7 +7,7 @@ let nav_barap = () => {
     newNavDiv.classList.add("nav-custom-div");
 
     newNavDiv.innerHTML = `
-        <a href="javascript:loadmydiv('examinationsStudentMarkView')" id="EXM0011" class="btnItem"   >Marks View</a>
+        <a href="javascript:loadmydiv('examinations/StudentMarkView')" id="EXM0011" class="btnItem">Marks View</a>
         <a href="javascript:loadmydiv('academics/common/StudentAttendance')" id="ACD0042" class="btnItem"  >Class Attendance</a>
         <a href="javascript:loadmydiv('academics/common/StudentCoursePage')" id="ACD0045" class="btnItem"  >Course Page</a>
         <a href="javascript:loadmydiv('examinations/StudentDA')" id="EXM0017" class="btnItem"  >DA Upload</a>
