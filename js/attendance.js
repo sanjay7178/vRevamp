@@ -80,6 +80,7 @@ let view_attendance_page = () => {
 chrome.runtime.onMessage.addListener((request) => {
     if (request.message === "view_attendance") {
         try {
+            chooseCurrentSemester();
             view_attendance_page();
         } catch (error) {
             // console.log(error);
