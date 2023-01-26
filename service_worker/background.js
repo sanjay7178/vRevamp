@@ -140,11 +140,6 @@ chrome.webRequest.onCompleted.addListener(
       returnMessage("vtop2_nav_bar");
 
     }
-    else if (link.indexOf("vtop2/doLogin") !== -1 || link.indexOf("assets/img/favicon.png") !== -1 || link.indexOf("goHomePage") !== -1) {
-      // returnMessage("vtop2_nav_bar");
-      returnMessage("vtop2_nav_bar");
-
-    }
     else if (link.indexOf("doSearchExamScheduleForStudent") !== -1) {
       returnMessage("exam_schedule");
     }
