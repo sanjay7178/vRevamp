@@ -7,8 +7,8 @@
       "service_worker": "service_worker/background.js"
    },
    "content_scripts": [ {
-      "css": ["css/table.css"],
-      "js": [ "js/timetable/createTimeTable.js", "js/timetable/parsersTimeTable.js", "js/timetable/timetable.js" ,"js/attendance.js", "js/marks_page.js", "js/course_page.js", "js/navbar.js", "js/da_upload.js", "js/captcha/bitmaps.js", "js/captcha/captchaparser.js", "js/exam_schedule.js", "js/navbarcc.js" ,"js/navbarap.js","js/popup.js" ],
+      "css": ["css/table.css", "css/nav-custom-div.css"],
+      "js": ["js/utils/chooseCurrentSem.js", "js/timetable/createTimeTable.js", "js/timetable/parsersTimeTable.js", "js/timetable/timetable.js" ,"js/attendance.js", "js/marks_page.js", "js/course_page.js", "js/da_upload.js", "js/captcha/bitmaps.js", "js/captcha/captchaparser.js", "js/exam_schedule.js", "js/navbarcc.js" ,"js/navbarap.js","js/popup.js" ],
       "matches": [ "*://vtop.vit.ac.in/*", "*://vtopcc.vit.ac.in/vtop/*" ,"*://vtop2.vitap.ac.in/vtop/*" ]
    } ],
    "description": "Enhance your VTOP in one click",
