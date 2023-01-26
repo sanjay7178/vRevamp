@@ -24,8 +24,8 @@ const nav_bar_change = () => {
     }
   }
   let nav = document.getElementsByClassName("collapse navbar-collapse");
-  let span = document.createElement("div");
-  span.innerHTML = `
+  let div = document.createElement("div");
+  div.innerHTML = `
   <span class="navbar-text px-0 px-sm-2 mx-0 mx-sm-1 text-light" ></span>
 
   <button class="btn btn-primary border-primary shadow-none" type="button" style="background: rgba(13,110,253,0);border-style: none;" onclick="document.getElementsByClassName('dropdown-item menuFontStyle systemBtnMenu')[${marks}].click()" id="nav_short">Marks View</button>
@@ -40,7 +40,7 @@ const nav_bar_change = () => {
 
   <button class="btn btn-primary border-primary shadow-none" type="button" style="background: rgba(13,110,253,0);border-style: none;" onclick="document.getElementsByClassName('dropdown-item menuFontStyle systemBtnMenu')[${calendar}].click()" id="nav_short">Calendar</button>
   `;
-  nav[0].insertBefore(span, nav[0].children[0]);
+  nav[0].insertBefore(div, nav[0].children[0]);
 
   let buttons = document.querySelectorAll("[id=nav_short]");
   buttons.forEach((button) => {
