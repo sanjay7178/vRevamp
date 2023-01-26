@@ -112,6 +112,7 @@ chrome.downloads.onDeterminingFilename.addListener((item, suggest) => {
 chrome.webRequest.onCompleted.addListener(
   (details) => {
     let link = details["url"];
+    console.log(link);
     time_last = new Date();
     set_time_last(time_last);
     if (link.indexOf("doStudentMarkView") !== -1) {
@@ -122,6 +123,9 @@ chrome.webRequest.onCompleted.addListener(
     }
     else if (link.indexOf("processViewStudentAttendance") !== -1 || link.indexOf("processBackAttendanceDetails") !== -1) {
       returnMessage("view_attendance");
+    }
+    else if (link.indexOf("StudentAttendance") !== -1) {
+      returnMessage("view_attendance_page");
     }
     else if (link.indexOf("processViewStudentCourseDetail") !== -1) {
       returnMessage("course_page_change");
