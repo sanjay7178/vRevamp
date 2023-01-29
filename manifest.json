@@ -11,7 +11,7 @@
       "js": ["js/utils/chooseCurrentSem.js", "js/timetable/createTimeTable.js", "js/timetable/parsersTimeTable.js", "js/timetable/timetable.js" ,"js/attendance.js", "js/marks_page.js", "js/course_page.js", "js/da_upload.js", "js/captcha/bitmaps.js", "js/captcha/captchaparser.js", "js/exam_schedule.js", "js/navbarcc.js" ,"js/navbarap.js","js/popup.js" ],
       "matches": [ "*://vtop.vit.ac.in/*", "*://vtopcc.vit.ac.in/vtop/*" ,"*://vtop2.vitap.ac.in/vtop/*" ]
    } ],
-   "description": "Enhance your VTOP in one click",
+   "description": "Enhancing the better way to use VTOP",
    "host_permissions": [ "*://vtop.vit.ac.in/*", "*://vtopcc.vit.ac.in/vtop/*","*://vtop2.vitap.ac.in/vtop/*" ],
    "icons": {
       "128": "assets/icons/img_128.png",
