@@ -34,6 +34,11 @@ let modify_marks_page = () => {
             tot_scored += parseFloat(scored);
             tot_weightage_equi += parseFloat(weightage_equi);
             tot_class_avg += parseFloat(class_avg);
+
+            const MAX_MARKS_INDEX = 2;
+            let td = document.createElement("td");
+            td.innerHTML = `<b>${scored} / ${max_marks}</b>`;
+            row.insertBefore( td, row.children[MAX_MARKS_INDEX] );
         });
 
         //Add the row to display totals
