@@ -59,3 +59,21 @@
     border: 2px solid var(--table-color);
     background-color: var(--table-color-light);
 }
+
+a.download-timetable{
+    padding: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    transition: .5s;
+}
+
+a.download-timetable:hover{
+    text-decoration: none;
+    color: var(--table-color);
+}

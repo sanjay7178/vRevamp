@@ -32,6 +32,16 @@ const change_time_table = () => {
     table_div.className = "table-div";
     table_div.appendChild(table);
     parent_div.insertBefore(table_div, timeTableLoader);
+    
+    const a = create_download_link();
+    // print(table_div);
+    domtoimage.toPng(table_div, { quality: 0.99 }).then(
+        (blob) => {
+            a.download = 'timetable.png';
+            a.href = blob;
+        }
+    );
+    parent_div.insertBefore(a, table_div);
 };
 
 const MutationObserverConfig = { attributes: true, childList: true, subtree: true };
