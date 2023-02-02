@@ -30,7 +30,7 @@ const change_time_table = () => {
     const timeTableLoader = document.getElementById("loadMyFragment");
     const parent_div = timeTableLoader.parentElement;
     // remove the previous table and download link if it exists
-    document.querySelectorAll(".table-div").forEach((div) => { console.log(div); div.remove() });
+    document.querySelectorAll(".table-div").forEach((div) => { div.remove() });
     document.querySelectorAll(".download-timetable").forEach((a) => a.remove());
     // create a new table div and add the table to it
     const table_div = document.createElement("div");

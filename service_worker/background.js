@@ -112,7 +112,6 @@ chrome.downloads.onDeterminingFilename.addListener((item, suggest) => {
 chrome.webRequest.onCompleted.addListener(
   (details) => {
     let link = details["url"];
-    console.log(link);
     time_last = new Date();
     set_time_last(time_last);
     if (link.indexOf("doStudentMarkView") !== -1) {
