@@ -9,11 +9,11 @@
 const change_time_table = () => {
     const parent_table = document.getElementById("timeTableStyle");
     if (parent_table === null || parent_table === undefined || parent_table.children.length === 0) return;
-    
+
     const tbody_table = parent_table.children[0]; // the first element is the <tbody> with data
     const children_data_arr = extract_tbody_data(tbody_table.children);
     const tdHeader = createTableHead(extract_header(tbody_table.children));
-    
+
     const table = document.createElement("table"); table.className = "styled-table";
     table.appendChild(tdHeader);
     const tBody = document.createElement("tbody");
@@ -26,14 +26,19 @@ const change_time_table = () => {
     }
     table.appendChild(tBody);
 
+    // getting the actual div of the timetable
     const timeTableLoader = document.getElementById("loadMyFragment");
     const parent_div = timeTableLoader.parentElement;
+    // remove the previous table and download link if it exists
+    document.querySelectorAll(".table-div").forEach((div) => { console.log(div); div.remove() });
+    document.querySelectorAll(".download-timetable").forEach((a) => a.remove());
+    // create a new table div and add the table to it
     const table_div = document.createElement("div");
     table_div.className = "table-div";
     table_div.appendChild(table);
     parent_div.insertBefore(table_div, timeTableLoader);
-    
-    const a = create_download_link();
+
+    const a = create_download_link("download-timetable"); // className = download-timetable
     // print(table_div);
     domtoimage.toPng(table_div, { quality: 0.99 }).then(
         (blob) => {

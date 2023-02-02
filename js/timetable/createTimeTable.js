@@ -36,10 +36,10 @@ function create_td(theoryClassText, labClassText) {
     return _create_td_element(add(theoryClassText, labClassText), "theory-block")
 }
 
-function create_download_link() {
+function create_download_link(className) {
     const a = document.createElement("a");
     a.innerHTML = `<i style="font-size: 24px" class="fa">&#xf019;</i> Download Timetable as PNG`;
-    a.className = "download-timetable";
+    a.className = className;
     return a;
 }
 
