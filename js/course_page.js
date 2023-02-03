@@ -277,7 +277,7 @@ chrome.runtime.onMessage.addListener((request) => {
                 clearInterval(loader);
                 // gets the registration number
                 if (document.getElementsByClassName("navbar-text text-light small fw-bold")[0] == undefined) {
-                    reg_no = document.getElementsByClassName("VTopHeaderStyle")[0].innerText.replace("(STUDENT)", "").trim() || "";
+                    //reg_no = document.getElementsByClassName("VTopHeaderStyle")[0].innerText.replace("(STUDENT)", "").trim() || "";
                 }
                 else
                     reg_no = document.getElementsByClassName("navbar-text text-light small fw-bold")[0].innerText.replace("(STUDENT)", "").trim() || "";
