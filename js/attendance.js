@@ -2,7 +2,7 @@
 let view_attendance_page = () => {
     //Working of the calculator
     let table_line = document.querySelectorAll(".table-responsive")[0]
-    table_line.getElementsByTagName("span")[0].outerHTML += "<br><br><p style='color:red;'>*Note: This calculator doesn't calculate the attendace till the end of the sem, It only calculates the attendance to 75%</p>";
+    table_line.getElementsByTagName("span")[0].outerHTML += "<br><br><p style='color:red;'>*Note: This calculator doesn't calculate the attendace till the end of the sem, It only calculates the attendance to 80%</p>";
 
     //Footer edited_head
     let color_detail = document.createElement("div");
@@ -16,7 +16,7 @@ let view_attendance_page = () => {
     //Head edit
     var table_head = document.getElementsByTagName("thead");
     var edited_head = table_head[0].innerHTML.split("\n");
-    edited_head.splice(19, 0, '<th style="vertical-align: middle; text-align: center; border-right: 1px solid #b2b2b2; padding: 5px;">75% Attendance Alert</th>');
+    edited_head.splice(19, 0, '<th style="vertical-align: middle; text-align: center; border-right: 1px solid #b2b2b2; padding: 5px;">80% Attendance Alert</th>');
     table_head[0].innerHTML = edited_head.join("");
 
     //Body Edit
@@ -28,12 +28,12 @@ let view_attendance_page = () => {
             let attended_classes = parseFloat(new_Table_Content[23].split(">")[2].slice(0, 3));
             let tot_classes = parseFloat(new_Table_Content[24].split(">")[2].slice(0, 3));
             let course_type = new_Table_Content[8];
-            if (attended_classes / tot_classes < 0.7401) {
+            if (attended_classes / tot_classes < 0.80) {
                 //To maintain exact 75%
                 // let req_classes = Math.ceil((3 * (tot_classes)) - (4 * (attended_classes))); 
 
                 //Calculates the attendace to 74.01% (as vit consider it as 75%)
-                let req_classes = Math.ceil(((0.7401 * tot_classes) - attended_classes) / 0.2599);
+                let req_classes = Math.ceil(((0.80 * tot_classes) - attended_classes) / 0.2599);
 
                 if (course_type.includes("Lab")) {
                     req_classes /= 2;
@@ -50,10 +50,10 @@ let view_attendance_page = () => {
                 // let bunk_classes = Math.floor(((4 / 3) * (attended_classes)) - tot_classes);
 
                 //For 74.01% which vit calculates it as 75%
-                let bunk_classes = Math.floor((attended_classes - (0.7401 * tot_classes)) / 0.7401);
+                let bunk_classes = Math.floor((attended_classes - (0.80 * tot_classes)) / 0.80);
 
                 let color = "rgb(170, 255, 0,0.7)";
-                if (0.7401 <= (attended_classes / tot_classes) && (attended_classes / tot_classes) <= 0.7499) {
+                if (0.7401 <= (attended_classes / tot_classes) && (attended_classes / tot_classes) <= 0.80) {
                     color = "rgb(255, 171, 16)";
                 }
 
