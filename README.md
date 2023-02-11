@@ -4,3 +4,5 @@
 you can find out at [Releases](https://github.com/sanjay7178/vRevamp/releases/)
 ## Chrome Extension
 you can find out the chrome extension at [vRevamp](https://chrome.google.com/webstore/detail/vrevamp/jfmlhhjlkbliphgkmeingeacbijcilcl)
+##Privacy Policy
+you can find out the privacy policy at [link](https://vrevamp.nullchapter.tech/privacy-policy)
