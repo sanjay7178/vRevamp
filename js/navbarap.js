@@ -5,7 +5,7 @@ let nav_barap = () => {
     let newNavDiv = document.createElement("div");
     // div.className = "navbar-brand";
     newNavDiv.classList.add("nav-custom-div");
-
+    reg_no =document.querySelector("#authorizedIDX").value;
     newNavDiv.innerHTML = `
         <a href="javascript:loadmydiv('examinations/StudentMarkView')" id="EXM0011" class="btnItem">Marks View</a>
         <a href="javascript:loadmydiv('academics/common/StudentAttendance')" id="ACD0042" class="btnItem"  >Class Attendance</a>
@@ -14,6 +14,9 @@ let nav_barap = () => {
         <a href="javascript:loadmydiv('academics/common/StudentTimeTable')" id="ACD0034" class="btnItem"  >Time Table</a>
         <a href="javascript:loadmydiv('academics/common/CalendarPreview')" id="ACD0128" class="btnItem"  >Academic Calendar</a>
         <a href="javascript:loadmydiv('academics/common/Curriculum')" id="ACD0104" class="btnItem"  >My Curriculum</a>
+				<a style="color: white;">${reg_no}(STUDENT)</a>
+        <a class="btn btn-success" href="javascript:void(0)" onclick="ajaxCall('processLogout',null,'page_outline')">Sign out</a>               
+
         `;
     
     const menuToggleHamburger = document.getElementById("menu-toggle");
