@@ -117,6 +117,7 @@ chrome.webRequest.onCompleted.addListener(
     time_last = new Date();
     set_time_last(time_last);
     if (link.indexOf("doStudentMarkView") !== -1) {
+      // console.log("mark_view");
       returnMessage("mark_view_page");
     }
     else if (link.indexOf("StudentTimeTable") !== -1) {
@@ -147,6 +148,14 @@ chrome.webRequest.onCompleted.addListener(
     }
     else if (link.indexOf("doSearchExamScheduleForStudent") !== -1) {
       returnMessage("exam_schedule");
+    }
+    else if (link.indexOf("examGradeView/doStudentGradeView") != -1){
+      // console.log("Exam Grade");
+      returnMessage("exam_grade");
+    }
+    else if (link.indexOf("examGradeView/getGradeViewDetail") != -1){
+      // console.log("Exam Grade");
+      returnMessage("exam_grade");
     }
   },
   {
