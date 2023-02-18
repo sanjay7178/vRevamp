@@ -27,7 +27,7 @@
    },
    "permissions": [ "webRequest", "downloads", "storage", "tabs", "identity", "alarms" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "2.1",
+   "version": "2.2",
    "web_accessible_resources": [ {
       "matches": [ "*://*.vit.ac.in/*" , "*://*.vitap.ac.in/*" ],
       "resources": [ "js/captcha/weights.json" ]
