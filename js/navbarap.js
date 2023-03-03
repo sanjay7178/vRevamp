@@ -15,7 +15,7 @@ let nav_barap = () => {
         <a href="javascript:loadmydiv('academics/common/CalendarPreview')" id="ACD0128" class="btnItem"  >Academic Calendar</a>
         <a href="javascript:loadmydiv('academics/common/Curriculum')" id="ACD0104" class="btnItem"  >My Curriculum</a>
         <a href="javascript:loadmydiv('examinations/examGradeView/StudentGradeView')" id="EXM0065" class="btnItem"  >Sem Grade</a>
-				<a style="color: white;">${reg_no}(STUDENT)</a>
+        <a href="javascript:loadmydiv('studentsRecord/StudentProfileAllView')" id="STA002" class="btnItem" >${reg_no}(STUDENT)</a>
         <a class="btn btn-success" href="javascript:void(0)" onclick="ajaxCall('processLogout',null,'page_outline')">Sign out</a>               
         `;
     const menuToggleHamburger = document.getElementById("menu-toggle");
