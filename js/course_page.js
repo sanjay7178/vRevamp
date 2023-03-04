@@ -237,7 +237,7 @@ const modify_page = () => {
     let download_all_u = download_all_vtop.cloneNode(true);
     download_all_u.removeAttribute("href");
     download_all_u.style = "float: right; width: auto; margin-right: 10px; margin-top: -1px";
-    download_all_u.onclick = () => download_files("all");
+    download_all_u.onclick = () => processbackToFilterCourse();
     // document.getElementsByClassName("box-title")[0].appendChild(download_all_u);
     document.getElementsByClassName("table-responsive")[1].appendChild(download_all_u);
 
