@@ -59,7 +59,7 @@ let exam_schedule_sync = () => {
                     seat_location: []
                 }
                 let body = "";
-                console.log(exam.course_code,exam.course_title,exam.end_time)
+                // console.log(exam.course_code,exam.course_title,exam.end_time)
                 header = "BEGIN:VCALENDAR\n"+
                 "VERSION:2.0\n"+
                 "PRODID:-//ChatGPT//iCal Generator//EN\n"+
@@ -100,8 +100,8 @@ let exam_schedule_sync = () => {
                     }
                 }
                 i= 0;
-                console.log(row_count)
-                console.log(exam.course_code,exam.course_title,exam.exam_date,exam.exam_time,exam.venue,exam.venue_room, exam.seat_location)
+                // console.log(row_count)
+                // console.log(exam.course_code,exam.course_title,exam.exam_date,exam.exam_time,exam.venue,exam.venue_room, exam.seat_location)
                 // console.log(exam)
                 while (i < exam.course_code.length) {
                     var tmp = exam.exam_date[i].split("-");
@@ -118,11 +118,22 @@ let exam_schedule_sync = () => {
                     }}catch(error){
                         alert("Please check your exam schedule and try again "+exam.course_code[i]+" "+" has no exam time")
                     }
+                    const now = new Date();
+                    // Format the date and time as a string in the correct format
+                    const year1 = now.getUTCFullYear();
+                    const month1 = String(now.getUTCMonth() + 1).padStart(2, '0');
+                    const day1 = String(now.getUTCDate()).padStart(2, '0');
+                    const hour1 = String(now.getUTCHours()).padStart(2, '0');
+                    const minute1 = String(now.getUTCMinutes()).padStart(2, '0');
+                    const second1 = String(now.getUTCSeconds()).padStart(2, '0');
+
+                    console.log(start_time,end_time)
 
                     try{header += "BEGIN:VEVENT\n"+ 
-                    "UID:test-1\n" +
-                    "DTSTART:"+ `${tmp[2]}${map[tmp[1]]}${tmp[0]}T`+ `${start_time.split(":")[0]+start_time.split(":")[1]}00Z\n`+
-                    "DTEND:"+ `${tmp[2]}${map[tmp[1]]}${tmp[0]}T`+ `${end_time.split(":")[0]+end_time.split(":")[1]}00Z\n`+
+                    "UID:"+ `${year1}${month1}${day1}T${hour1}${minute1}${second1}Z-${exam.course_code[i]}@vitap.ac.in\n`+
+                    "DTSTAMP:"+ `${year1}${month1}${day1}T${hour1}${minute1}${second1}Z\n`+
+                    "DTSTART:"+ `${tmp[2]}${map[tmp[1]]}${tmp[0]}T`+ `${start_time.split(":")[0]}`+`${start_time.split(":")[1]}00Z\n`+
+                    "DTEND:"+ `${tmp[2]}${map[tmp[1]]}${tmp[0]}T`+ `${end_time.split(":")[0]}`+`${end_time.split(":")[1]}00Z\n`+
                     "SUMMARY:"+ exam.course_code[i]+":"+exam.course_title[i]+"\n"+
                     "DESCRIPTION:"+"Seat Location : "+exam.seat_location[i] +";"+ " Seat Number : "+exam.seat_number[i] + "\n"+
                     "LOCATION:"+ exam.venue[i]+" "+exam.venue_room[i]+" " +"\n"+
@@ -144,7 +155,7 @@ let exam_schedule_sync = () => {
                 // console.log(document.querySelector("#semesterSubId").options[document.querySelector("#semesterSubId").options.selectedIndex].innerText+" "+".ics");
                 footer = "END:VCALENDAR"
                 try{ics = header  + footer;        
-                console.log(ics);  
+                // console.log(ics);  
                 // download ics as file
                 var element = document.createElement('a');
                 element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(ics));
