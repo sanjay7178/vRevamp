@@ -131,9 +131,9 @@ let exam_schedule_sync = () => {
 
                     try{header += "BEGIN:VEVENT\n"+ 
                     "UID:"+ `${year1}${month1}${day1}T${hour1}${minute1}${second1}Z-${exam.course_code[i]}@vitap.ac.in\n`+
-                    "DTSTAMP:"+ `${year1}${month1}${day1}T${hour1}${minute1}${second1}Z\n`+
-                    "DTSTART:"+ `${tmp[2]}${map[tmp[1]]}${tmp[0]}T`+ `${start_time.split(":")[0]}`+`${start_time.split(":")[1]}00Z\n`+
-                    "DTEND:"+ `${tmp[2]}${map[tmp[1]]}${tmp[0]}T`+ `${end_time.split(":")[0]}`+`${end_time.split(":")[1]}00Z\n`+
+                    "DTSTAMP;TZID=Asia/Kolkata:"+ `${year1}${month1}${day1}T${hour1}${minute1}${second1}Z\n`+
+                    "DTSTART;TZID=Asia/Kolkata:"+ `${tmp[2]}${map[tmp[1]]}${tmp[0]}T`+ `${start_time.split(":")[0]}`+`${start_time.split(":")[1]}00Z\n`+
+                    "DTEND;TZID=Asia/Kolkata:"+ `${tmp[2]}${map[tmp[1]]}${tmp[0]}T`+ `${end_time.split(":")[0]}`+`${end_time.split(":")[1]}00Z\n`+
                     "SUMMARY:"+ exam.course_code[i]+":"+exam.course_title[i]+"\n"+
                     "DESCRIPTION:"+"Seat Location : "+exam.seat_location[i] +";"+ " Seat Number : "+exam.seat_number[i] + "\n"+
                     "LOCATION:"+ exam.venue[i]+" "+exam.venue_room[i]+" " +"\n"+
@@ -218,6 +218,7 @@ let exam_schedule_sync = () => {
                     let [start_time, end_time] = get_date_time(dte, details.exam_time[j]);
                     // console.log(start_time, end_time);
                     fetch(
+                        // test key (it's invalid)
                         "https://www.googleapis.com/calendar/v3/calendars/primary/events?sendUpdates=all&sendNotifications=true&alt=json&key=AIzaSyCPBz-DTZdoTLQ_ZiqsVUO520XItcomTn0",
                         {
                             method: "POST",
