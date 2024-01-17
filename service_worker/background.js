@@ -17,8 +17,6 @@ chrome.runtime.onMessage.addListener((request) => {
   }
 });
 
-
-
 let set_time_last = (time) => {
   // console.log(time);
   time_last = time;
@@ -54,7 +52,7 @@ const trigger_download = (request) => {
   });
 };
 
-//Gives the file name 
+//Gives the file name
 const get_file_name = (fname, url) => {
   let title = "";
   let file_extension = fname.replace(/([^_]*_){8}/, "").split(".");
@@ -73,15 +71,14 @@ const get_file_name = (fname, url) => {
         title += file_prefix[i];
         title += " ";
       }
-      title = index + title.split(".")[0] + "-" + file_prefix[7] + file_extension;
-    }
-    else {
+      title =
+        index + title.split(".")[0] + "-" + file_prefix[7] + file_extension;
+    } else {
       title = file_prefix + file_extension;
     }
     // console.log(title);
     return title;
-  }
-  else if (det_file_name === "fac_upload_name") {
+  } else if (det_file_name === "fac_upload_name") {
     let index = file_name[url] || "";
     index = index.split("-")[0] + "-";
     let file_prefix = fname.split("_");
@@ -102,9 +99,16 @@ chrome.downloads.onDeterminingFilename.addListener((item, suggest) => {
     const title = get_file_name(item.filename, item.url);
     // console.log(course == "");
     if (course != "" && faculty_slot != "")
-      suggest({ filename: "VIT Downloads/" + course.replace(":", "") + "/" + faculty_slot + "/" + title, });
-    else
-      suggest({ filename: "VIT Downloads/Other Downloads/" + title });
+      suggest({
+        filename:
+          "VIT Downloads/" +
+          course.replace(":", "") +
+          "/" +
+          faculty_slot +
+          "/" +
+          title,
+      });
+    else suggest({ filename: "VIT Downloads/Other Downloads/" + title });
   }
 });
 
@@ -119,57 +123,54 @@ chrome.webRequest.onCompleted.addListener(
     if (link.indexOf("doStudentMarkView") !== -1) {
       // console.log("mark_view");
       returnMessage("mark_view_page");
-    }
-    else if (link.indexOf("StudentTimeTable") !== -1) {
+    } else if (link.indexOf("StudentTimeTable") !== -1) {
       returnMessage("timetable_view_page");
-    }
-    else if (link.indexOf("processViewStudentAttendance") !== -1 || link.indexOf("processBackAttendanceDetails") !== -1) {
+    } else if (
+      link.indexOf("processViewStudentAttendance") !== -1 ||
+      link.indexOf("processBackAttendanceDetails") !== -1
+    ) {
       returnMessage("view_attendance");
-    }
-    else if (link.indexOf("StudentAttendance") !== -1) {
+    } else if (link.indexOf("StudentAttendance") !== -1) {
       returnMessage("view_attendance_page");
-    }
-    else if (link.indexOf("processViewStudentCourseDetail") !== -1) {
+    } else if (link.indexOf("processViewStudentCourseDetail") !== -1) {
       returnMessage("course_page_change");
-    }
-    else if (link.indexOf("doDigitalAssignment") !== -1) {
+    } else if (link.indexOf("doDigitalAssignment") !== -1) {
       returnMessage("da_upload");
-    }
-    else if (link.indexOf("vtopcc.vit.ac.in/vtop/vtopLogin") !== -1) {
+    } else if (link.indexOf("vtopcc.vit.ac.in/vtop/vtopLogin") !== -1) {
       returnMessage("vtopcc_captcha");
-    }
-    else if (link.indexOf("vtop2.vitap.ac.in/vtop/vtopLogin") !== -1) {
+    } else if (link.indexOf("vtop.vitap.ac.in/vtop/vtopLogin") !== -1) {
       returnMessage("vtop2_captcha");
-    }
-    else if (link.indexOf("vtop/doLogin") !== -1 || link.indexOf("assets/img/favicon.png") !== -1 || link.indexOf("goHomePage") !== -1) {
+    } else if (
+      link.indexOf("vtop/doLogin") !== -1 ||
+      link.indexOf("assets/img/favicon.png") !== -1 ||
+      link.indexOf("goHomePage") !== -1
+    ) {
       // returnMessage("vtopcc_nav_bar");
       returnMessage("vtop2_nav_bar");
-
-    }
-    else if (link.indexOf("doSearchExamScheduleForStudent") !== -1) {
+    } else if (link.indexOf("doSearchExamScheduleForStudent") !== -1) {
       returnMessage("exam_schedule");
-    }
-    else if (link.indexOf("examGradeView/doStudentGradeView") != -1){
+    } else if (link.indexOf("examGradeView/doStudentGradeView") != -1) {
       // console.log("Exam Grade");
       returnMessage("exam_grade");
-    }
-    else if (link.indexOf("examGradeView/getGradeViewDetail") != -1){
+    } else if (link.indexOf("examGradeView/getGradeViewDetail") != -1) {
       // console.log("Exam Grade");
       returnMessage("exam_grade");
     }
   },
   {
-    urls: ["*://vtop.vit.ac.in/*", "*://vtopcc.vit.ac.in/vtop/*","*://vtop2.vitap.ac.in/vtop/*"],
+    urls: [
+      "*://vtop.vit.ac.in/*",
+      "*://vtopcc.vit.ac.in/vtop/*",
+      "*://vtop.vitap.ac.in/vtop/*",
+    ],
   }
 );
 
-//Fires the msg from script 
+//Fires the msg from script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   try {
-    if (request.message.course !== "")
-      trigger_download(request);
-  }
-  catch {
+    if (request.message.course !== "") trigger_download(request);
+  } catch {
     if (request.message == "login") {
       chrome.identity.getAuthToken({ interactive: true }, (auth_token) => {
         chrome.storage.sync.set({ token: auth_token });
@@ -177,14 +178,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         sendResponse(true);
         return true;
       });
-    }
-    else if (request.message === "logout") {
+    } else if (request.message === "logout") {
       user_signed_in = false;
-      chrome.identity.clearAllCachedAuthTokens(() => { chrome.storage.sync.set({ token: null }); });
+      chrome.identity.clearAllCachedAuthTokens(() => {
+        chrome.storage.sync.set({ token: null });
+      });
     }
-
   }
-
 });
 
 //Removes the inactivity of service worker

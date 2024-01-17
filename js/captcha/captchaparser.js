@@ -49,7 +49,6 @@
   return captcha;
 };
 
-
 const uri_to_img_data = (URI) => {
   return new Promise(function (resolve, reject) {
     if (URI == null) return reject();
@@ -92,7 +91,6 @@ const solve_captcha = (img) => {
   const image = img.src;
   fill_captcha(image);
 };
-
 
 const pre_img = (img) => {
   let avg = 0;
@@ -138,8 +136,6 @@ const saturation = (d) => {
   }
   return bls;
 };
-
-
 
 const flatten = (arr) => {
   var bits = new Array(arr.length * arr[0].length);
@@ -198,7 +194,9 @@ const HEIGHT = 40;
 const WIDTH = 200;
 
 const solve = (img, textB) => {
-  fetch("chrome-extension://mhbflefepokengbccinkmfhokjkphbol/js/captcha/weights.json")
+  fetch(
+    "chrome-extension://mhbflefepokengbccinkmfhokjkphbol/js/captcha/weights.json"
+  )
     .then((response) => response.json())
     .then((data) => {
       const weights = data.weights;
@@ -224,7 +222,7 @@ const solve = (img, textB) => {
 };
 
 function myMain(evt) {
-  if (document.URL.match('https://vtopcc.vit.ac.in/vtop/initialProcess')) {
+  if (document.URL.match("https://vtopcc.vit.ac.in/vtop/initialProcess")) {
     const jsInitChecktimer = setInterval(checkForJS_Finish, 111);
     function checkForJS_Finish() {
       let element = document.querySelector('img[alt="vtopCaptcha"]');
@@ -239,8 +237,9 @@ function myMain(evt) {
         });
       }
     }
-  }
-  else if (document.URL.match('https://vtop2.vitap.ac.in/vtop/initialProcess')) {
+  } else if (
+    document.URL.match("https://vtop.vitap.ac.in/vtop/initialProcess")
+  ) {
     const jsInitChecktimer = setInterval(checkForJS_Finish, 111);
     function checkForJS_Finish() {
       let element = document.querySelector('img[alt="vtopCaptcha"]');
@@ -255,9 +254,10 @@ function myMain(evt) {
         });
       }
     }
-  }
-  else if (document.URL.match('https://vtop.vit.ac.in/vtop/login')) {
-    var img = document.getElementsByClassName("form-control img-fluid bg-light border-0")[0];
+  } else if (document.URL.match("https://vtop.vit.ac.in/vtop/login")) {
+    var img = document.getElementsByClassName(
+      "form-control img-fluid bg-light border-0"
+    )[0];
     img.style.height = "40px!important";
     img.style.width = "200px!important";
     var textB = document.getElementById("captchaStr");
