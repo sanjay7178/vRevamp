@@ -195,7 +195,7 @@ const WIDTH = 200;
 
 const solve = (img, textB) => {
   fetch(
-    "chrome-extension://mhbflefepokengbccinkmfhokjkphbol/js/captcha/weights.json"
+    "chrome-extension://jfmlhhjlkbliphgkmeingeacbijcilcl/js/captcha/weights.json"
   )
     .then((response) => response.json())
     .then((data) => {
@@ -254,7 +254,7 @@ function myMain(evt) {
         });
       }
     }
-  } else if (document.URL.match("https://vtop.vit.ac.in/vtop/login")) {
+  } else if (document.URL.match("https://vtop.vitap.ac.in/vtop/login")) {
     var img = document.getElementsByClassName(
       "form-control img-fluid bg-light border-0"
     )[0];
