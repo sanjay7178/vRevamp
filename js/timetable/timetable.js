@@ -11,14 +11,22 @@ const change_time_table = () => {
     if (parent_table === null || parent_table === undefined || parent_table.children.length === 0) return;
 
     const tbody_table = parent_table.children[0]; // the first element is the <tbody> with data
-    const children_data_arr = extract_tbody_data(tbody_table.children);
-    const tdHeader = createTableHead(extract_header(tbody_table.children));
+    const extractedHeader = extract_header(tbody_table.children);
+    const extracted_children = extract_tbody_data(tbody_table.children);
+    const merged_data = merge_tbody_data(extractedHeader, extracted_children)
+    const children_data_arr = merged_data;
+
+    // creating the table head
+    extractedHeader.splice(0, 1); // remove the first element which is just "starttime-endtime[1,4,9,16,25];"
+    const tdHeader = createTableHead(filterRepeated(extractedHeader));
 
     const table = document.createElement("table"); table.className = "styled-table";
     table.appendChild(tdHeader);
     const tBody = document.createElement("tbody");
     for (let i = 0; i < children_data_arr.length; i++) {
         let { day, theory: theoryDataArr, lab: labDataArr } = children_data_arr[i];
+        theoryDataArr.splice(0, 1); // remove the first element which is just starttime-endtime 
+        labDataArr.splice(0, 1); // remove the first element which is just starttime-endtime
         const tr = createTr(theoryDataArr, labDataArr);
         const day_td = _create_td_element(day, "day-block");
         tr.insertBefore(day_td, tr.children[0]);
@@ -39,7 +47,6 @@ const change_time_table = () => {
     parent_div.insertBefore(table_div, timeTableLoader);
 
     const a = create_download_link("download-timetable"); // className = download-timetable
-    // print(table_div);
     domtoimage.toPng(table_div, { quality: 0.99 }).then(
         (blob) => {
             a.download = 'timetable.png';
@@ -55,7 +62,7 @@ chrome.runtime.onMessage.addListener((request) => {
     if (request.message === "timetable_view_page") {
         try {
             // auto fetch the details of the current semester 
-            chooseCurrentSemester();
+            // chooseCurrentSemester();
             const timeTableDiv = document.getElementById("loadMyFragment");
             const timeTableDivObserver = new MutationObserver((mutationsList, observer) => change_time_table());
             timeTableDivObserver.observe(timeTableDiv, MutationObserverConfig);
