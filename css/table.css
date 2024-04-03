@@ -1,7 +1,8 @@
 
 .table-div{
     width: 100%;
-    background-color: white;
+    /* background-color: white; */
+    background: transparent;
     overflow-x: scroll;
 }
 
@@ -31,7 +32,7 @@
 
 .styled-table th,
 .styled-table td {
-    padding: 12px 15px;
+    padding: 12px 15px !important;
 }
 
 .styled-table tbody tr {
@@ -39,7 +40,7 @@
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+    background-color: rgba(120, 180, 150, 0.05);
 }
 
 .styled-table tbody tr:last-of-type {
