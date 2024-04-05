@@ -13,6 +13,7 @@
         "js/modules/dom-to-image.js",
         "js/utils/chooseCurrentSem.js",
         "js/utils/filterRepeated.js",
+        "js/utils/saveTimeTableDetails.js",
         "js/timetable/createTimeTable.js",
         "js/timetable/parsersTimeTable.js",
         "js/timetable/timetable.js",

@@ -58,15 +58,15 @@ function extract_tr_data(_trHTML, is_lab = false) {
   return text_arr;
 }
 
-function merge_tbody_data(tdHeader, children_data_arr){
+function filterRepeatedColumns(tdHeader, childrenDataArr){
   // tdHeader = ['Start - End', '08:00 - 08:50', '09:00 - 09:50', '09:00 - 09:50', '10:00 - 10:50', '10:00 - 10:50', '11:00 - 11:50', '11:00 - 11:50', '12:00 - 12:50', '13:00 - 13:50', 'Lunch - Lunch', '14:00 - 14:50', '14:00 - 14:50', '15:00 - 15:50', '15:00 - 15:50', '16:00 - 16:50', '16:00 - 16:50', '17:00 - 17:50', '18:00 - 18:50', '19:00 - 19:50']
   // children_data_arr = [{day: "Monday", theory: ["TA1-CSE1005-ETH-G14-CB-ALL"], "lab": []}]
 
   const new_children_data_arr = [];
 
-  for(let dayIdx=0; dayIdx<children_data_arr.length; dayIdx++){
-    const day = children_data_arr[dayIdx].day;
-    const { theory, lab } = children_data_arr[dayIdx];
+  for(let dayIdx=0; dayIdx<childrenDataArr.length; dayIdx++){
+    const day = childrenDataArr[dayIdx].day;
+    const { theory, lab } = childrenDataArr[dayIdx];
 
     let seen_headers = [];
     let new_theory = [];
