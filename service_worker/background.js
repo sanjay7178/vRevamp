@@ -197,3 +197,18 @@ chrome.alarms.onAlarm.addListener(() => {
   let a;
   let time_nw = new Date();
 });
+
+
+/* 
+ * Checks if the user is online or offline
+ * and renders an offline view for the page
+*/
+
+chrome.webRequest.onBeforeRequest.addListener((details) => {
+  const isOnline = navigator.onLine
+  if (!isOnline) {
+    chrome.tabs.create({ url: chrome.runtime.getURL("html/offline.html") });
+  }
+}, { urls: VTOP_URLS },);
+
+
