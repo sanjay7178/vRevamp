@@ -206,6 +206,7 @@ chrome.alarms.onAlarm.addListener(() => {
 
 chrome.webRequest.onBeforeRequest.addListener((details) => {
   const isOnline = navigator.onLine
+  if(isOnline) return;
   if (!isOnline) {
     chrome.tabs.create({ url: chrome.runtime.getURL("html/offline.html") });
   }
