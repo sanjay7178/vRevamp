@@ -32,6 +32,7 @@
       "matches": [
         "*://vtop.vit.ac.in/*",
         "*://vtopcc.vit.ac.in/vtop/*",
+        "*://vtop.vitap.ac.in/*",
         "*://vtop.vitap.ac.in/vtop/*"
       ]
     }
@@ -40,6 +41,7 @@
   "host_permissions": [
     "*://vtop.vit.ac.in/*",
     "*://vtopcc.vit.ac.in/vtop/*",
+    "*://vtop.vitap.ac.in/*",
     "*://vtop.vitap.ac.in/vtop/*"
   ],
   "icons": {
