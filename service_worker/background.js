@@ -4,17 +4,14 @@ let file_name = {};
 let time_last = new Date();
 let det_file_name = "table_name";
 
+const VTOP_URLS = [
+  "*://vtop.vit.ac.in/*",
+  "*://vtopcc.vit.ac.in/vtop/*",
+  "*://vtop.vitap.ac.in/vtop/*",
+  "*://vtop.vitap.ac.in/*",
+];
+
 const API_KEY = "AIzaSyAXTXcZx8zuDZl2qRdDqzkqi5nEpjDBwWg";
-
-/* 
- * Checks if the user is online or offline
- * and sends a message to the content script 
-*/
-navigator.connection.addEventListener('change', () => { 
-    const isOnline = navigator.onLine
-    returnMessage( isOnline ? "online" : "offline" )
-});
-
 
 chrome.runtime.onMessage.addListener((request) => {
   if (request.message === "table_name") {
@@ -122,12 +119,6 @@ chrome.downloads.onDeterminingFilename.addListener((item, suggest) => {
   }
 });
 
-chrome.webRequest.onBeforeRequest.addListener((details) => {
-  console.log(details);
-}, {
-  urls: ["<all_urls>"],
-});
-
 /* Fires after the completion of a request */
 chrome.webRequest.onCompleted.addListener(
   (details) => {
@@ -175,11 +166,7 @@ chrome.webRequest.onCompleted.addListener(
     }
   },
   {
-    urls: [
-      "*://vtop.vit.ac.in/*",
-      "*://vtopcc.vit.ac.in/vtop/*",
-      "*://vtop.vitap.ac.in/vtop/*",
-    ],
+    urls: VTOP_URLS,
   }
 );
 
