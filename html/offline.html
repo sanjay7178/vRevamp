@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta https-equiv="Content-Security-Policy" content="default-src *;" />
+
+  <link rel="stylesheet" href="../css/table.css">
+  <link rel="stylesheet" href="../css/scrollBar.css">
+
+  <style>
+    body {
+      background: black;
+      color: white;
+    }
+  </style>
+
+  <style>
+    #marks-body table, td, tr{
+      border: 1px solid grey;
+      border-collapse: collapse; 
+    } 
+    #marks-body .customTable-level1{
+      margin-bottom: 20px;
+    }
+  </style>
+
+
+  <title></title>
+</head>
+
+<body>
+
+  <h3 class="offline-text">You are currently offline!</h3>
+
+  <!-- This div fills the timetable of the student  -->
+  <div id="tt-body"></div>
+
+  <!-- This div fills the marks page -->
+  <div id="marks-body"></div>
+
+  <script src="../js/store/store.js"></script>
+  <script src="../js/store/saveTimeTableDetails.js"></script>
+  <script src="../js/store/saveMarksPage.js"></script>
+  <script src="../js/utils/filterRepeated.js"></script>
+
+  <script src="../js/timetable/createTimeTable.js"></script>
+  <script src="../js/timetable/parsersTimeTable.js"></script>
+  <script src="../js/timetable/timetable.js"></script>
+
+  <script src="../js/offline/renderTimetable.js"></script>
+  <script src="../js/offline/renderMarksPage.js"></script>
+</body>
+
+</html>
