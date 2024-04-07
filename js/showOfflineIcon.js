@@ -22,8 +22,13 @@ const offlineIconSVG = `
 
 chrome.runtime.onMessage.addListener((request) => {
   if (request.message === "showOfflineIcon") {
+    // check if offline button already exsits 
+    if (document.getElementById("offlineIcon")) {
+      return;
+    }
     //  put the show offline icon at the bottom left corder of the page 
     const offlineIcon = document.createElement("div");
+    offlineIcon.id = "offlineIcon";
     offlineIcon.innerHTML = offlineIconSVG;
     offlineIcon.style.position = "fixed";
     offlineIcon.style.bottom = "25px";
