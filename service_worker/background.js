@@ -128,6 +128,7 @@ chrome.webRequest.onCompleted.addListener(
     // alert(link.index);
     time_last = new Date();
     set_time_last(time_last);
+    returnMessage("showOfflineIcon");
     if (link.indexOf("doStudentMarkView") !== -1) {
       // console.log("mark_view");
       returnMessage("mark_view_page");
@@ -208,8 +209,16 @@ chrome.webRequest.onBeforeRequest.addListener((details) => {
   const isOnline = navigator.onLine
   if(isOnline) return;
   if (!isOnline) {
-    chrome.tabs.create({ url: chrome.runtime.getURL("html/offline.html") });
+    viewOfflinePage();
   }
 }, { urls: VTOP_URLS },);
 
+function viewOfflinePage(){
+  chrome.tabs.create({ url: chrome.runtime.getURL("html/offline.html") });
+}
 
+chrome.runtime.onMessage.addListener((request) => {
+  if (request.message === "showOfflinePage") {
+    viewOfflinePage();
+  }
+});

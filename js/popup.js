@@ -4,7 +4,9 @@ let viewOfflineButton = document.getElementById("view-offline")
 const API_KEY = "AIzaSyAXTXcZx8zuDZl2qRdDqzkqi5nEpjDBwWg";
 
 viewOfflineButton.addEventListener("click", ()=>{
-  chrome.tabs.create({url: chrome.runtime.getURL("html/offline.html")});
+    chrome.runtime.sendMessage({
+        message: "showOfflinePage",
+    });  
 });
 
 logout.style.display="none";
