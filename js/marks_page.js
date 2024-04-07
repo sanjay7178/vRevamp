@@ -172,8 +172,9 @@ chrome.runtime.onMessage.addListener((request) => {
     if (request.message === "mark_view_page") {
         try {
             modify_marks_page();
+            saveMarksPage(document.querySelector(".box-body").outerHTML);
         } catch (error) {
-            // console.log(error);
+            console.error(error);
         }
     }
 });

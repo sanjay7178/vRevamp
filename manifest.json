@@ -16,7 +16,8 @@
 
         "js/store/store.js",
         "js/store/saveTimeTableDetails.js",
-
+        "js/store/saveMarksPage.js",
+        
         "js/showOfflineIcon.js",
         "js/timetable/createTimeTable.js",
         "js/timetable/parsersTimeTable.js",
