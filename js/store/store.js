@@ -10,7 +10,7 @@ const store = chrome.storage.local;
 function saveData(key, data) {
   const d = {};
   d[key] = data;
-  chrome.storage.local.set(d, () => {
+  store.set(d, () => {
     if (chrome.runtime.lastError) {
       console.error("Error saving data: " + chrome.runtime.lastError.message);
     } else {
@@ -25,20 +25,20 @@ function saveData(key, data) {
   * @returns {void}
 */
 function getData(key, callback) {
-  // Retrieve timetable data from Chrome storage
-  chrome.storage.local.get(timeTableKey, function(result) {
+  // Retrieve data from Chrome storage
+  store.get(key, function(result) {
     if (chrome.runtime.lastError) {
       console.error("Error retrieving data: " + chrome.runtime.lastError.message);
       callback(null); // Notify callback function with null if there's an error
     } else {
-      // Extract timetable data from result
+      // Extract data from result
       const localData = result[key];
       if (localData) {
-        // If timetable exists, pass it to the callback function
+        // If exists, pass it to the callback function
         callback(localData);
       } else {
         console.warn("Data not found.");
-        callback(null); // Notify callback function if timetable doesn't exist
+        callback(null); // Notify callback function if doesn't exist
       }
     }
   });
