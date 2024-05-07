@@ -1,10 +1,7 @@
 getMarksPage((htmlDataAsStr) => {
   const marksPageBody = document.getElementById('marks-body');
   if (htmlDataAsStr === null) {
-    const noData = document.createElement('p');
-    noData.className = 'no-data';
-    noData.innerText = 'No Data Available';
-    marksPageBody.appendChild(noData);
+    marksPageBody.innerHTML = `<p class="no-data">No Data Available</p>`;
     return;
   }
   marksPageBody.innerHTML = htmlDataAsStr;
