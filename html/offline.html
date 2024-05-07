@@ -14,14 +14,48 @@
       background: black;
       color: white;
     }
+
+    .menu {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      padding-bottom: 10px;
+      /* overflow-x: scroll; */
+    }
+
+    .menu li {
+      display: inline-block;
+      margin-right: 10px;
+      cursor: pointer;
+      padding: 8px;
+      border: 1px solid grey;
+      min-width: 120px;
+      text-align: center;
+    }
+
+    .menu li:hover {
+      background-color: grey;
+    }
+
+    .menu li.active {
+      background-color: grey;
+    }
+
+    .container {
+      margin-top: 20px;
+    }
   </style>
 
   <style>
-    #marks-body table, td, tr{
+    #marks-body table,
+    td,
+    tr {
       border: 1px solid grey;
-      border-collapse: collapse; 
-    } 
-    #marks-body .customTable-level1{
+      border-collapse: collapse;
+    }
+
+    #marks-body .customTable-level1 {
       margin-bottom: 20px;
     }
   </style>
@@ -33,14 +67,20 @@
 <body>
 
   <h3 class="offline-text">You are currently offline!</h3>
+  <div class="container">
+    <ul class="menu" id="menu"></ul>
 
-  <!-- This div fills the timetable of the student  -->
-  <div id="tt-body"></div>
+    <div id="content">
+      <!-- This div fills the timetable of the student  -->
+      <div id="tt-body" data-name="Time Table"></div>
+      <!-- This div fills the marks page -->
+      <div id="marks-body" data-name="Marks"></div>
+      <!-- This div fills the exam-schedule-body -->
+      <div id="exam-schedule-body" data-name="Exam schedule"></div>
+    </div>
+  </div>
 
-  <!-- This div fills the marks page -->
-  <div id="marks-body"></div>
-
-  <div id="exam-schedule-body"></div>
+  <script src="../js/offline/createNavMenu.js"></script>
 
   <script src="../js/store/store.js"></script>
 
