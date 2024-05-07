@@ -122,7 +122,6 @@ chrome.downloads.onDeterminingFilename.addListener((item, suggest) => {
 /* Fires after the completion of a request */
 chrome.webRequest.onCompleted.addListener(
   (details) => {
-    console.log(details);
     let link = details["url"];
     // console.log(link);
     // alert(link.index);

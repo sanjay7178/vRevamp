@@ -12,8 +12,6 @@ function createMenu() {
     });
   });
 
-  console.log(menuItemData);
-
   menuItemData.forEach((label) => {
     let li = document.createElement('li');
     li.textContent = label.name;

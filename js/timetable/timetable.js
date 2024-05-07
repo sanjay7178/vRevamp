@@ -40,7 +40,6 @@ function createTable(header, bodyData) {
     const tr = createTr(theoryDataArr, labDataArr);
     const day_td = _create_td_element(day, "day-block");
     tr.insertBefore(day_td, tr.children[0]);
-    console.log({ dayIndex, i })
     if (dayIndex == toIndex(day)) {
       tr.classList.add("current-day");
     }
