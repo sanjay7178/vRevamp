@@ -18,6 +18,7 @@
         "js/store/saveTimeTableDetails.js",
         "js/store/saveMarksPage.js",
         "js/store/saveExamSchedulePage.js",
+        "js/store/saveAttendancePage.js",
         
         "js/showOfflineIcon.js",
         "js/timetable/createTimeTable.js",
