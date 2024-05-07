@@ -52,6 +52,12 @@
     color: var(--table-color);
 }
 
+.styled-table tbody tr.current-day td:nth-child(1){
+  font-weight: bold;
+  color: var(--table-color);
+  text-decoration: underline;
+}
+
 .theory-block{
     border: 2px solid var(--table-alt-color);
     background-color: var(--table-alt-color-light);

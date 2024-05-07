@@ -32,6 +32,7 @@ function createTable(header, bodyData) {
   const table = document.createElement("table"); table.className = "styled-table";
   table.appendChild(tdHeader);
   const tBody = document.createElement("tbody");
+  const dayIndex = (new Date()).getDay();
   for (let i = 0; i < bodyData.length; i++) {
     let { day, theory: theoryDataArr, lab: labDataArr } = bodyData[i];
     theoryDataArr.splice(0, 1); // remove the first element which is just starttime-endtime 
@@ -39,6 +40,10 @@ function createTable(header, bodyData) {
     const tr = createTr(theoryDataArr, labDataArr);
     const day_td = _create_td_element(day, "day-block");
     tr.insertBefore(day_td, tr.children[0]);
+    console.log({ dayIndex, i })
+    if (dayIndex == toIndex(day)) {
+      tr.classList.add("current-day");
+    }
     tBody.appendChild(tr);
   }
   table.appendChild(tBody);
@@ -46,6 +51,16 @@ function createTable(header, bodyData) {
   table_div.className = "table-div";
   table_div.appendChild(table);
   return table_div;
+}
+
+function toIndex(day) {
+  if (day === "MON") return 1;
+  if (day === "TUE") return 2;
+  if (day === "WED") return 3;
+  if (day === "THU") return 4;
+  if (day === "FRI") return 5;
+  if (day === "SAT") return 6;
+  return 0;
 }
 
 function insertTable(table_div) {
