@@ -264,6 +264,14 @@ function myMain(evt) {
     var submitB = document.getElementById("submitBtn");
     solve(img, textB);
     submitB.focus();
+  } else {
+    var img = document.getElementById("captcha_id");
+    img.style.height = "40px!important";
+    img.style.width = "200px!important";
+    var textB = document.getElementById("captchaString");
+    var submitB = document.getElementById("loginButton");
+    solve(img, textB);
+    submitB.focus();
   }
 }
 
