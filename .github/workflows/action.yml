@@ -1,0 +1,73 @@
+name: 'Build Chrome extension'
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install packages
+      run: npm ci
+      shell: bash
+
+    - name: Build extension
+      run: npm run build --if-present
+      shell: bash
+
+    - name: Pack extension
+      working-directory: out
+      run: zip -r extension-${{ github.event.pull_request.head.sha }}.zip *
+      shell: bash
+
+    - name: Upload extension archive
+      uses: actions/upload-artifact@v3
+      with:
+        name: extension-${{ github.sha }}
+        path: out/extension-${{ github.event.pull_request.head.sha }}.zip
+
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-extension:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/buildextension
+
+name: Upload to Web Store
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  build-extension:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/buildextension
+
+  upload-extension:
+    runs-on: ubuntu-latest
+    needs: build-extension
+    steps:
+      - name: Download extension archive
+        uses: actions/download-artifact@v3
+        with:
+          name: extension-${{ github.sha }}
+
+      - name: Upload to webstore
+        uses: ExtensionNinja/extension-publish@main
+        with:
+          action: upload
+          extensionID: INSERT_YOUR_EXTENSION_ID
+          clientID: ${{ secrets.CI_GOOGLE_CLIENT_ID }}
+          clientSecret: ${{ secrets.CI_GOOGLE_CLIENT_SECRET }}
+          clientRefreshToken: ${{ secrets.CI_GOOGLE_REFRESH_TOKEN }}
+          extensionFile: extension-${{ github.event.pull_request.head.sha }}.zip
