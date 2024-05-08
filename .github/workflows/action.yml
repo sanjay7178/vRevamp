@@ -30,13 +30,8 @@ name: Build
 
 on:
   push:
-
-on:
-  push:
     tags:
-      - v*.*.*
-  pull_request:
-    branches: [ main ]
+      - '*'
 
 jobs:
   build-extension:
