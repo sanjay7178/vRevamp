@@ -13,25 +13,34 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Check if package.json exists
+        run: test -f package.json
+        shell: bash
+
       - name: Setup Node.js
+        if: success()
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 14
 
       - name: Install dependencies
+        if: success()
         run: npm install
         shell: bash
 
       - name: Build extension
+        if: success()
         run: npm run build --if-present
         shell: bash
 
       - name: Pack extension
+        if: success()
         run: zip -r extension-${{ github.event.pull_request.head.sha }}.zip *
         working-directory: dist
         shell: bash
 
       - name: Upload extension archive
+        if: success()
         uses: actions/upload-artifact@v3
         with:
           name: extension-${{ github.sha }}
