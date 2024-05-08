@@ -20,6 +20,10 @@ jobs:
         with:
           node-version: 18
 
+      - name: Install packages
+        run: npm install
+        shell: /usr/bin/bash --noprofile --norc -e -o pipefail
+
 
       - name: Install packages
         run: npm ci
