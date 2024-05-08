@@ -1,10 +1,11 @@
 name: Build Chrome extension
 
+
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   build-extension:
@@ -12,36 +13,33 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Check if package.json exists
-        run: test -f package.json
-        shell: bash
+        
 
       - name: Setup Node.js
-        if: success()
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 18
 
-      - name: Install dependencies
-        if: success()
-        run: npm install
-        shell: bash
+      # - name: Install packages
+      #   run: npm install
+      #   shell: bash
 
-      - name: Build extension
-        if: success()
-        run: npm run build --if-present
-        shell: bash
+
+      # - name: Install packages
+      #   run: npm ci
+      #   shell: bash
+
+      # - name: Build extension
+      #   run: npm run build --if-present	
+      #   shell: bash
 
       - name: Pack extension
-        if: success()
+        working-directory: out
         run: zip -r extension-${{ github.event.pull_request.head.sha }}.zip *
-        working-directory: dist
         shell: bash
 
       - name: Upload extension archive
-        if: success()
         uses: actions/upload-artifact@v3
         with:
           name: extension-${{ github.sha }}
-          path: dist/extension-${{ github.event.pull_request.head.sha }}.zip
+          path: out/extension-${{ github.event.pull_request.head.sha }}.zip
