@@ -1,32 +1,4 @@
-name: 'Build Chrome extension'
-runs:
-  using: "composite"
-  steps:
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-
-    - name: Install packages
-      run: npm ci
-      shell: bash
-
-    - name: Build extension
-      run: npm run build --if-present
-      shell: bash
-
-    - name: Pack extension
-      working-directory: out
-      run: zip -r extension-${{ github.event.pull_request.head.sha }}.zip *
-      shell: bash
-
-    - name: Upload extension archive
-      uses: actions/upload-artifact@v3
-      with:
-        name: extension-${{ github.sha }}
-        path: out/extension-${{ github.event.pull_request.head.sha }}.zip
-
-name: Build
+name: Build Chrome extension
 
 on:
   push:
@@ -37,5 +9,29 @@ jobs:
   build-extension:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/buildextension
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install packages
+        run: npm ci
+        shell: bash
+
+      - name: Build extension
+        run: npm run build --if-present
+        shell: bash
+
+      - name: Pack extension
+        working-directory: out
+        run: zip -r extension-${{ github.event.pull_request.head.sha }}.zip *
+        shell: bash
+
+      - name: Upload extension archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: extension-${{ github.sha }}
+          path: out/extension-${{ github.event.pull_request.head.sha }}.zip
