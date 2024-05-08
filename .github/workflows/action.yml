@@ -22,7 +22,7 @@ jobs:
 
       - name: Install packages
         run: npm install
-        shell: /usr/bin/bash --noprofile --norc -e -o pipefail
+        shell: /bin/bash --noprofile --norc -e -o pipefail
 
 
       - name: Install packages
