@@ -14,16 +14,17 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build
-        run: |-
-          # fill in your build steps here...
-          # we archive the dist folder and include SHA commit as the last step
-          zip -r chrome-extension-${{ github.event.pull_request.head.sha }}.zip dist
-
-      - name: Archive chrome-extension artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: chrome-extension-${{ github.sha }}
-          path: chrome-extension-${{ github.event.pull_request.head.sha }}.zip
+        run: |
+          # Add your build steps here...
+          # Ensure that 'dist' folder is created with necessary files
+          # Example: npm run build
+          # After build, archive the dist folder and include SHA commit as the last step
+          if [ -d "dist" ]; then
+            zip -r chrome-extension-${{ github.event.pull_request.head.sha }}.zip dist
+          else
+            echo "Error: 'dist' folder not found."
+            exit 1
+          fi
 
   # api usage reference:
   # * <https://developer.chrome.com/docs/webstore/using_webstore_api/>
