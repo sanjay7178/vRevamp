@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta https-equiv="Content-Security-Policy" content="default-src *;" />
+
+  <link rel="stylesheet" href="../css/table.css">
+  <link rel="stylesheet" href="../css/scrollBar.css">
+
+  <style>
+    body {
+      background: black;
+      color: white;
+    }
+
+    .menu {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      padding-bottom: 10px;
+      /* overflow-x: scroll; */
+    }
+
+    .menu li {
+      display: inline-block;
+      margin-right: 10px;
+      cursor: pointer;
+      padding: 8px;
+      border: 1px solid grey;
+      min-width: 120px;
+      text-align: center;
+    }
+
+    .menu li:hover {
+      background-color: grey;
+    }
+
+    .menu li.active {
+      background-color: grey;
+    }
+
+    .container {
+      margin-top: 20px;
+    }
+  </style>
+
+  <style>
+    #marks-body table,
+    td,
+    tr {
+      border: 1px solid grey;
+      border-collapse: collapse;
+    }
+
+    #marks-body .customTable-level1 {
+      margin-bottom: 20px;
+    }
+  </style>
+
+
+  <title></title>
+</head>
+
+<body>
+
+  <h3 class="offline-text">You are currently offline!</h3>
+  <div class="container">
+    <ul class="menu" id="menu"></ul>
+
+    <div id="content">
+      <!-- This div fills the timetable of the student  -->
+      <div id="tt-body" data-name="Time Table"></div>
+      <!-- This div fills the marks page -->
+      <div id="marks-body" data-name="Marks"></div>
+      <!-- This div fills the exam-schedule-body -->
+      <div id="exam-schedule-body" data-name="Exam schedule"></div>
+      <!-- This div fills the attendance details filled from cache-->
+      <div id="attendance-body" data-name="Attendance"></div>
+    </div>
+  </div>
+
+  <script src="../js/offline/createNavMenu.js"></script>
+
+  <script src="../js/store/store.js"></script>
+
+  <script src="../js/store/saveTimeTableDetails.js"></script>
+  <script src="../js/store/saveMarksPage.js"></script>
+  <script src="../js/utils/filterRepeated.js"></script>
+  <script src="../js/store/saveExamSchedulePage.js"></script>
+  <script src="../js/store/saveAttendancePage.js"></script>
+
+  <script src="../js/timetable/createTimeTable.js"></script>
+  <script src="../js/timetable/parsersTimeTable.js"></script>
+  <script src="../js/timetable/timetable.js"></script>
+
+  <script src="../js/offline/renderTimetable.js"></script>
+  <script src="../js/offline/renderMarksPage.js"></script>
+  <script src="../js/offline/renderExamSchedulePage.js"></script>
+  <script src="../js/offline/renderAttendancePage.js"></script>
+
+</body>
+
+</html>

@@ -67,7 +67,12 @@ function getBlockText(b1, b2) {
 
 function addBlocks(b1, b2) {
     // check if b1 has only "-" character repeated using regex
-    if (b1.match(/^-+$/)) return b2;
-    if (b2.match(/^-+$/)) return b1;
+    const b1_match = b1.match(/^_+$/) || b1.match(/^-+$/);
+    const b2_match = b2.match(/^_+$/) || b2.match(/^-+$/);
+    if(b1_match && b2_match) return "";
+
+    if (b1_match) return b2;
+    if (b2_match) return b1;
+    
     return b1 + " / " + b2;
 }

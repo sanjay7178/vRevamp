@@ -1,6 +1,13 @@
 let login = document.getElementById("login");
 let logout = document.getElementById("logout");
+let viewOfflineButton = document.getElementById("view-offline")
 const API_KEY = "AIzaSyAXTXcZx8zuDZl2qRdDqzkqi5nEpjDBwWg";
+
+viewOfflineButton.addEventListener("click", ()=>{
+    chrome.runtime.sendMessage({
+        message: "showOfflinePage",
+    });  
+});
 
 logout.style.display="none";
 login.addEventListener("click",()=>{

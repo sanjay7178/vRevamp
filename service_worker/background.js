@@ -4,6 +4,13 @@ let file_name = {};
 let time_last = new Date();
 let det_file_name = "table_name";
 
+const VTOP_URLS = [
+  "*://vtop.vit.ac.in/*",
+  "*://vtopcc.vit.ac.in/vtop/*",
+  "*://vtop.vitap.ac.in/vtop/*",
+  "*://vtop.vitap.ac.in/*",
+];
+
 const API_KEY = "AIzaSyAXTXcZx8zuDZl2qRdDqzkqi5nEpjDBwWg";
 
 chrome.runtime.onMessage.addListener((request) => {
@@ -120,6 +127,7 @@ chrome.webRequest.onCompleted.addListener(
     // alert(link.index);
     time_last = new Date();
     set_time_last(time_last);
+    returnMessage("showOfflineIcon");
     if (link.indexOf("doStudentMarkView") !== -1) {
       // console.log("mark_view");
       returnMessage("mark_view_page");
@@ -165,11 +173,7 @@ chrome.webRequest.onCompleted.addListener(
     
   },
   {
-    urls: [
-      "*://vtop.vit.ac.in/*",
-      "*://vtopcc.vit.ac.in/vtop/*",
-      "*://vtop.vitap.ac.in/vtop/*",
-    ],
+    urls: VTOP_URLS,
   }
 );
 
@@ -201,3 +205,26 @@ chrome.alarms.onAlarm.addListener(() => {
   let time_nw = new Date();
 });
 
+/* 
+ * Checks if the user is online or offline
+ * and renders an offline view for the page
+*/
+
+chrome.webRequest.onBeforeRequest.addListener((details) => {
+  const isOnline = navigator.onLine
+  if(isOnline) return;
+  if (!isOnline) {
+    viewOfflinePage();
+  }
+}, { urls: VTOP_URLS },);
+
+function viewOfflinePage(){
+  chrome.tabs.create({ url: chrome.runtime.getURL("html/offline.html") });
+}
+
+chrome.runtime.onMessage.addListener((request) => {
+  if (request.message === "showOfflinePage") {
+    viewOfflinePage();
+  }
+});
+=======
