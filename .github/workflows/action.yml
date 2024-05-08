@@ -34,7 +34,7 @@ jobs:
       #   shell: bash
 
       - name: Pack extension
-        working-directory: out
+        working-directory: .
         run: zip -r extension-${{ github.event.pull_request.head.sha }}.zip *
         shell: bash
 
