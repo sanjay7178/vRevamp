@@ -80,53 +80,53 @@ let modify_marks_page = () => {
         let pass_marks;
 
         //Theorey Subjects
-        if ((sub_type.includes("Theory") && tot_weightage_percent == 75 )) {
-            if (tot_cat_fat >= 44) {
-                pass_marks = 44;
-                table.innerHTML += `
-                <tr class="tableContent-level1" style='background: rgb(170, 255, 0,0.6);'>
-                    <td colspan="10" style="text-align:center">You secured in CAT+FAT : ${tot_cat_fat}</td>
-                </tr>
-                <tr class="tableContent-level1" style='background: rgb(170, 255, 0,0.6);'>
-                    <td colspan="10" style="text-align:center">You need only ${pass_marks} marks out of ${max_marks_cat_fat} in CAT + FAT to pass theory component 🥳</td>
-                </tr>
+        // if ((sub_type.includes("Theory") && tot_weightage_percent == 75 )) {
+        //     if (tot_cat_fat >= 44) {
+        //         pass_marks = 44;
+        //         table.innerHTML += `
+        //         <tr class="tableContent-level1" style='background: rgb(170, 255, 0,0.6);'>
+        //             <td colspan="10" style="text-align:center">You secured in CAT+FAT : ${tot_cat_fat}</td>
+        //         </tr>
+        //         <tr class="tableContent-level1" style='background: rgb(170, 255, 0,0.6);'>
+        //             <td colspan="10" style="text-align:center">You need only ${pass_marks} marks out of ${max_marks_cat_fat} in CAT + FAT to pass theory component 🥳</td>
+        //         </tr>
 
-                `;
-            }
-            else {
-                pass_marks = 45 - tot_cat_fat ;
-                max_pass_marks =  max_marks_cat_fat  -45 ;
-                table.innerHTML += `
-                <tr class="tableContent-level1" style='background: rgb(255,0,0,0.6);'>
-                    <td colspan="10" style="text-align:center"><b>Minimum marks required to clear this component is : ${pass_marks.toFixed(2)} and max marks are  ${max_pass_marks}<b></td>
-                </tr>
-                `;
-            }
-        }
+        //         `;
+        //     }
+        //     else {
+        //         pass_marks = 45 - tot_cat_fat ;
+        //         max_pass_marks =  max_marks_cat_fat  -45 ;
+        //         table.innerHTML += `
+        //         <tr class="tableContent-level1" style='background: rgb(255,0,0,0.6);'>
+        //             <td colspan="10" style="text-align:center"><b>Minimum marks required to clear this component is : ${pass_marks.toFixed(2)} and max marks are  ${max_pass_marks}<b></td>
+        //         </tr>
+        //         `;
+        //     }
+        // }
         // Theory Only Subjects
-        if (sub_type.includes("Only")) {
-            if (tot_cat_fat >= 44) {
-                pass_marks = 44;
-                table.innerHTML += `
-                <tr class="tableContent-level1" style='background: rgb(170, 255, 0,0.6);'>
-                    <td colspan="10" style="text-align:center">You secured in CAT+FAT : ${tot_cat_fat}</td>
-                </tr>
-                <tr class="tableContent-level1" style='background: rgb(170, 255, 0,0.6);'>
-                    <td colspan="10" style="text-align:center">You need only ${pass_marks} marks out of ${max_marks_cat_fat} in CAT + FAT to pass theory component 🥳</td>
-                </tr>
+        // if (sub_type.includes("Only")) {
+        //     if (tot_cat_fat >= 44) {
+        //         pass_marks = 44;
+        //         table.innerHTML += `
+        //         <tr class="tableContent-level1" style='background: rgb(170, 255, 0,0.6);'>
+        //             <td colspan="10" style="text-align:center">You secured in CAT+FAT : ${tot_cat_fat}</td>
+        //         </tr>
+        //         <tr class="tableContent-level1" style='background: rgb(170, 255, 0,0.6);'>
+        //             <td colspan="10" style="text-align:center">You need only ${pass_marks} marks out of ${max_marks_cat_fat} in CAT + FAT to pass theory component 🥳</td>
+        //         </tr>
 
-                `;
-            }
-            else {
-                pass_marks = 45 - tot_cat_fat ;
-                max_pass_marks =  max_marks_cat_fat  -45 ;
-                table.innerHTML += `
-                <tr class="tableContent-level1" style='background: rgb(255,0,0,0.6);'>
-                    <td colspan="10" style="text-align:center"><b>Minimum marks required to clear this component is : ${pass_marks.toFixed(2)} and max marks are  ${max_pass_marks}<b></td>
-                </tr>
-                `;
-            }
-        }
+        //         `;
+        //     }
+        //     else {
+        //         pass_marks = 45 - tot_cat_fat ;
+        //         max_pass_marks =  max_marks_cat_fat  -45 ;
+        //         table.innerHTML += `
+        //         <tr class="tableContent-level1" style='background: rgb(255,0,0,0.6);'>
+        //             <td colspan="10" style="text-align:center"><b>Minimum marks required to clear this component is : ${pass_marks.toFixed(2)} and max marks are  ${max_pass_marks}<b></td>
+        //         </tr>
+        //         `;
+        //     }
+        // }
         //Labs
         // else if ((sub_type.includes("Lab") || sub_type.includes("Online")) ) {
         //     if (tot_weightage_equi >= 50) {
@@ -148,24 +148,24 @@ let modify_marks_page = () => {
         // }
 
         //STS
-        else if (sub_type1.includes("STS")) {
-            if (tot_weightage_equi >= 50) {
-                pass_marks = "You have fulfilled the criteria of passing the STS 🥳"
-                table.innerHTML += `
-                <tr class="tableContent-level1" style='background: rgb(170, 255, 0,0.6);'>
-                    <td colspan="10" style="text-align:center">${pass_marks}</td>
-                </tr>
-                `;
-            }
-            else {
-                pass_marks = 50 - tot_weightage_equi;
-                table.innerHTML += `
-                <tr class="tableContent-level1" style='background: rgb(255,0,0,0.6);'>
-                    <td colspan="10" style="text-align:center"><b>Minimum marks required to clear STS is : ${pass_marks.toFixed(2)} marks<b></td>
-                </tr>
-                `;
-            }
-        }
+        // else if (sub_type1.includes("STS")) {
+        //     if (tot_weightage_equi >= 50) {
+        //         pass_marks = "You have fulfilled the criteria of passing the STS 🥳"
+        //         table.innerHTML += `
+        //         <tr class="tableContent-level1" style='background: rgb(170, 255, 0,0.6);'>
+        //             <td colspan="10" style="text-align:center">${pass_marks}</td>
+        //         </tr>
+        //         `;
+        //     }
+        //     else {
+        //         pass_marks = 50 - tot_weightage_equi;
+        //         table.innerHTML += `
+        //         <tr class="tableContent-level1" style='background: rgb(255,0,0,0.6);'>
+        //             <td colspan="10" style="text-align:center"><b>Minimum marks required to clear STS is : ${pass_marks.toFixed(2)} marks<b></td>
+        //         </tr>
+        //         `;
+        //     }
+        // }
     });
 }
 chrome.runtime.onMessage.addListener((request) => {

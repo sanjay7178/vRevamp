@@ -121,7 +121,7 @@ chrome.downloads.onDeterminingFilename.addListener((item, suggest) => {
 
 /* Fires after the completion of a request */
 chrome.webRequest.onCompleted.addListener(
-  (details) => {
+  async (details) => {
     let link = details["url"];
     // console.log(link);
     // alert(link.index);
@@ -160,10 +160,17 @@ chrome.webRequest.onCompleted.addListener(
     } else if (link.indexOf("examGradeView/doStudentGradeView") != -1) {
       // console.log("Exam Grade");
       returnMessage("exam_grade");
-    } else if (link.indexOf("examGradeView/getGradeViewDetail") != -1) {
+    } 
+    else if (link.indexOf("menu.js") !== -1 || link.indexOf("home") !== -1) {
+			if (link.indexOf("menu.js") !== -1) await sleep(3500);
+      console.log("nav_bar_change");
+			returnMessage("nav_bar_change");
+		} 
+    else if (link.indexOf("examGradeView/getGradeViewDetail") != -1) {
       // console.log("Exam Grade");
       returnMessage("exam_grade");
     }
+    
   },
   {
     urls: VTOP_URLS,
@@ -198,7 +205,6 @@ chrome.alarms.onAlarm.addListener(() => {
   let time_nw = new Date();
 });
 
-
 /* 
  * Checks if the user is online or offline
  * and renders an offline view for the page
@@ -221,3 +227,4 @@ chrome.runtime.onMessage.addListener((request) => {
     viewOfflinePage();
   }
 });
+=======

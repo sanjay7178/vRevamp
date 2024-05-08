@@ -37,7 +37,8 @@
         "js/grade_pags.js"
       ],
       "matches": [
-        "*://vtop.vit.ac.in/*",
+        "*://web.vitap.ac.in/*",
+        "*://vtop.vitap.ac.in/*",
         "*://vtopcc.vit.ac.in/vtop/*",
         "*://vtop.vitap.ac.in/*",
         "*://vtop.vitap.ac.in/vtop/*"
@@ -80,7 +81,8 @@
     "alarms"
   ],
   "update_url": "https://clients2.google.com/service/update2/crx",
-  "version": "3.1",
+
+  "version": "4.0",
   "web_accessible_resources": [
     {
       "matches": ["*://*.vit.ac.in/*", "*://*.vitap.ac.in/*"],
