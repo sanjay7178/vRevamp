@@ -1,9 +1,11 @@
 name: Build Chrome extension
 
+
 on:
   push:
-    tags:
-      - '*'
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build-extension:
