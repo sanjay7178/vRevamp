@@ -1,5 +1,5 @@
 # vRevamp
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) ![Chrome Extension Passing](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) ![Chrome Extension Passing](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white) [![Update Chrome Extension](https://github.com/sanjay7178/vRevamp/actions/workflows/main.yml/badge.svg)](https://github.com/sanjay7178/vRevamp/actions/workflows/main.yml)
 ## New Release 
 you can find out at [Releases](https://github.com/sanjay7178/vRevamp/releases/)
 
