@@ -2,7 +2,7 @@
   "action": {
     "default_popup": "html/popup.html"
   },
-  "author": "Sai Sanjay Kottakota (VIT-AP) 21mic7178",
+  "author": "sanjay7178.github.io",
   "background": {
     "service_worker": "service_worker/background.js"
   },
@@ -19,6 +19,8 @@
         "js/store/saveMarksPage.js",
         "js/store/saveExamSchedulePage.js",
         "js/store/saveAttendancePage.js",
+
+        "js/outing/store.js",
         
         "js/showOfflineIcon.js",
         "js/timetable/createTimeTable.js",
@@ -34,7 +36,9 @@
         "js/navbarcc.js",
         "js/navbarap.js",
         "js/popup.js",
-        "js/grade_pags.js"
+        "js/grade_pags.js" ,
+        "js/faculty.js",
+        "js/weekend_outing.js"
       ],
       "matches": [
         "*://web.vitap.ac.in/*",

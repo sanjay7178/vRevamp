@@ -148,6 +148,10 @@ chrome.webRequest.onCompleted.addListener(
       returnMessage("vtopcc_captcha");
     } else if (link.indexOf("vtop.vitap.ac.in/vtop/vtopLogin") !== -1) {
       returnMessage("vtop2_captcha");
+    } else if (link.indexOf("hrms/employeeSearchForStudent") !== -1) {
+      returnMessage("employee_search");
+    } else if (link.indexOf("hostel/StudentWeekendOuting") !== -1) {
+      returnMessage("weekend_outings");
     } else if (
       link.indexOf("vtop/doLogin") !== -1 ||
       link.indexOf("assets/img/favicon.png") !== -1 ||
@@ -160,17 +164,14 @@ chrome.webRequest.onCompleted.addListener(
     } else if (link.indexOf("examGradeView/doStudentGradeView") != -1) {
       // console.log("Exam Grade");
       returnMessage("exam_grade");
-    } 
-    else if (link.indexOf("menu.js") !== -1 || link.indexOf("home") !== -1) {
-			if (link.indexOf("menu.js") !== -1) await sleep(3500);
+    } else if (link.indexOf("menu.js") !== -1 || link.indexOf("home") !== -1) {
+      if (link.indexOf("menu.js") !== -1) await sleep(3500);
       console.log("nav_bar_change");
-			returnMessage("nav_bar_change");
-		} 
-    else if (link.indexOf("examGradeView/getGradeViewDetail") != -1) {
+      returnMessage("nav_bar_change");
+    } else if (link.indexOf("examGradeView/getGradeViewDetail") != -1) {
       // console.log("Exam Grade");
       returnMessage("exam_grade");
     }
-    
   },
   {
     urls: VTOP_URLS,
@@ -205,20 +206,23 @@ chrome.alarms.onAlarm.addListener(() => {
   let time_nw = new Date();
 });
 
-/* 
+/*
  * Checks if the user is online or offline
  * and renders an offline view for the page
-*/
+ */
 
-chrome.webRequest.onBeforeRequest.addListener((details) => {
-  const isOnline = navigator.onLine
-  if(isOnline) return;
-  if (!isOnline) {
-    viewOfflinePage();
-  }
-}, { urls: VTOP_URLS },);
+chrome.webRequest.onBeforeRequest.addListener(
+  (details) => {
+    const isOnline = navigator.onLine;
+    if (isOnline) return;
+    if (!isOnline) {
+      viewOfflinePage();
+    }
+  },
+  { urls: VTOP_URLS }
+);
 
-function viewOfflinePage(){
+function viewOfflinePage() {
   chrome.tabs.create({ url: chrome.runtime.getURL("html/offline.html") });
 }
 
@@ -227,4 +231,3 @@ chrome.runtime.onMessage.addListener((request) => {
     viewOfflinePage();
   }
 });
-

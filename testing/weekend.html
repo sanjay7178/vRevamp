@@ -1,0 +1,280 @@
+<form
+  class="form-horizontal"
+  id="outingForm"
+  name="outingForm"
+  autocomplete="off"
+>
+  <br />
+  <input
+    type="hidden"
+    name="authorizedID"
+    id="authorizedID"
+    value="21MIC7178"
+  />
+  <input type="hidden" name="BookingId" id="BookingId" value="" />
+  <span
+    class="col-md-12"
+    style="font-size: 20px; color: green; text-align: center"
+  ></span>
+  <span
+    class="col-sm-12 col-md-12"
+    style="font-size: 20px; color: red; text-align: center"
+  ></span>
+  <input type="hidden" id="success" value="" />
+  <input type="hidden" id="jsonBom" value="" />
+  <script>
+    /*<![CDATA[*/
+
+    var message = document.getElementById("jsonBom").value;
+    var success = document.getElementById("success").value;
+
+    if (message != "") {
+      swal(message, "", "error");
+    }
+
+    if (success != "") {
+      swal(success, "", "success");
+    }
+    //}
+
+    /*]]>*/
+  </script>
+
+  <div class="form-group text-center">
+    <span
+      id="upload-file-message"
+      style="color: green; font-weight: bold"
+    ></span>
+  </div>
+
+  <div>
+    <div class="Table col-sm-10 col-md-offset-1">
+      <div class="Row">
+        <div class="Cell" style="background-color: #d3d3d3; width: 35%">
+          <output> Register Number<font color="#FF0000">*</font> </output>
+        </div>
+
+        <div class="Cell" style="background-color: #fafafa">
+          <input
+            value="21MIC7178"
+            id="regNo"
+            name="regNo"
+            readonly="readonly"
+          />
+        </div>
+      </div>
+
+      <div class="Row">
+        <div class="Cell" style="background-color: #d3d3d3; width: 35%">
+          <output> Name<font color="#FF0000">*</font> </output>
+        </div>
+        <div class="Cell" style="background-color: #fafafa">
+          <input
+            value="KOTTAKOTA SAI SANJAY"
+            id="name"
+            name="name"
+            readonly="readonly"
+          />
+          <!-- <output th:text="${studentName}"></output> -->
+        </div>
+      </div>
+      <div class="Row">
+        <div class="Cell" style="background-color: #d3d3d3; width: 35%">
+          <output> Application No<font color="#FF0000">*</font> </output>
+        </div>
+        <div class="Cell" style="background-color: #fafafa">
+          <input
+            value="2021998373"
+            id="applicationNo"
+            name="applicationNo"
+            readonly="readonly"
+          />
+          <!-- <output th:text="${studentName}"></output> -->
+        </div>
+      </div>
+
+      <div class="Row">
+        <div class="Cell" style="background-color: #d3d3d3; width: 35%">
+          <output> Gender<font color="#FF0000">*</font> </output>
+        </div>
+        <div class="Cell" style="background-color: #fafafa">
+          <input value="MALE" id="gender" name="gender" readonly="readonly" />
+          <!-- <output th:text="${gender}"></output> -->
+        </div>
+      </div>
+      <div class="Row">
+        <div class="Cell" style="background-color: #d3d3d3; width: 35%">
+          <output> Hostel Block<font color="#FF0000">*</font> </output>
+        </div>
+        <div class="Cell" style="background-color: #fafafa">
+          <input
+            value="MH-3"
+            id="hostelBlock"
+            name="hostelBlock"
+            readonly="readonly"
+          />
+          <!-- <output th:text="${hostelBlock}"></output> -->
+        </div>
+      </div>
+      <div class="Row">
+        <div class="Cell" style="background-color: #d3d3d3; width: 35%">
+          <output> Room Number<font color="#FF0000">*</font> </output>
+        </div>
+        <div class="Cell" style="background-color: #fafafa">
+          <input value="702B" id="roomNo" name="roomNo" readonly="readonly" />
+        </div>
+      </div>
+      <!-- <div class="Row">
+            <div class="Cell"
+                style="background-color: #D3D3D3; width: 35%;">
+                <output>
+                    Place Of Visit<font color="#FF0000">*</font>
+                </output>
+            </div>
+
+            <div class="Cell" style="background-color: #fafafa;">
+                <input type="text"
+                <input class="form-control  input-md text-box single-line" th:value="${placeOfVisit}" id="placeOfVisit" required="required" name="placeOfVisit" maxlength="20" />
+            </div>
+        </div> -->
+      <div class="Row">
+        <div class="Cell" style="background-color: #d3d3d3; width: 35%">
+          <label for="place"
+            >Choose place of visit<font color="#FF0000">*</font></label
+          >
+        </div>
+        <div class="Cell" style="background-color: #fafafa">
+          <select name="outPlace" id="outPlace" required="required">
+            <option value="Vijayawada">Vijayawada</option>
+            <option value="Guntur">Guntur</option>
+            <option value="Tenali">Tenali</option>
+            <option value="Eluru">Eluru</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
+      </div>
+      <div class="Row">
+        <div class="Cell" style="background-color: #d3d3d3; width: 35%">
+          <output> Purpose Of Visit<font color="#FF0000">*</font> </output>
+        </div>
+        <div class="Cell" style="background-color: #fafafa">
+          <!-- <input type="text" -->
+          <input
+            class="form-control input-md text-box single-line"
+            required="required"
+            value=""
+            id="purposeOfVisit"
+            name="purposeOfVisit"
+            maxlength="20"
+          />
+        </div>
+      </div>
+      <div class="Row">
+        <div class="Cell" style="background-color: #d3d3d3; width: 35%">
+          <output> Date<font color="#FF0000">*</font> </output>
+        </div>
+        <div class="Cell" style="background-color: #fafafa; width: 35%">
+          <label for="outingDate"></label>
+          <input
+            type="text"
+            id="outingDate"
+            required="required"
+            name="outingDate"
+            class="hasDatepicker"
+          />
+        </div>
+      </div>
+      <div class="Row">
+        <div class="Cell" style="background-color: #d3d3d3; width: 35%">
+          <label for="time">Choose Time:<font color="#FF0000">*</font></label>
+        </div>
+        <div class="Cell" style="background-color: #fafafa">
+          <select name="outTime" id="outTime" required="required">
+            <!-- <option value="7 AM - 1PM">7 AM - 1PM</option>
+                    <option value="7:30 AM - 1:30PM">7:30 AM - 1:30PM</option>
+                    <option value="8 AM - 2PM">8 AM - 2PM</option>
+                    <option value="8:30 AM- 2:30PM">8:30 AM- 2:30PM</option>
+                    <option value="9 AM - 3PM">9 AM - 3PM</option> -->
+            <option value="9:30 AM- 3:30PM">9:30 AM- 3:30PM</option>
+            <!-- <option value="10 AM- 4PM">10 AM- 4PM</option> -->
+            <option value="10:30 AM- 4:30PM">10:30 AM- 4:30PM</option>
+            <!-- <option value="11 AM - 5PM">11 AM - 5PM</option> -->
+            <option value="11:30 AM- 5:30PM">11:30 AM- 5:30PM</option>
+            <!-- <option value="12 AM - 6PM">12 AM - 6PM</option> -->
+            <option value="12:30 PM- 6:30PM">12:30 AM- 6:30PM</option>
+            <!-- <option value="1 PM - 7PM">1 PM - 7PM</option>
+                    <option value="1:30 PM- 7:30PM">1:30 PM- 7:30PM</option> -->
+          </select>
+        </div>
+      </div>
+      <!-- 	<div class="Row">
+                <div class="Cell"
+                    style="background-color: #bbcbfd; width: 35%;">
+                    <output>
+                        Year<font color="#FF0000">*</font>
+                    </output>
+                </div>
+                <div class="Cell" style="background-color: #f5dee7;">
+                <input type="number" id="year" name="year" placeholder="YYYY" min="2022" max="2030">
+                </div>
+            </div> -->
+      <div class="Row">
+        <div class="Cell" style="background-color: #d3d3d3; width: 35%">
+          <output> Contact Number<font color="#FF0000">*</font> </output>
+        </div>
+        <div class="Cell" style="background-color: #fafafa; width: 35%">
+          <!-- <input type="number" id="contactNumber" name="contactNumber" /> -->
+          <input
+            class="form-control input-md text-box single-line"
+            pattern="[7-9]{1}[0-9]{9}"
+            value=""
+            id="contactNumber"
+            max="9999999999"
+            min="1000000000"
+            name="contactNumber"
+            required="required"
+            type="number"
+          />
+        </div>
+      </div>
+      <div class="Row">
+        <div class="Cell" style="background-color: #d3d3d3; width: 35%">
+          <output> Parent Contact Number<font color="#FF0000">*</font> </output>
+        </div>
+
+        <div class="Cell" style="background-color: #fafafa">
+          <input
+            value="9704371853"
+            id="parentContactNumber"
+            name="parentContactNumber"
+            readonly="readonly"
+          />
+          <!--change p1 readonly="readonly"  -->
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 col-md-offset-5">
+      <table class="table">
+        <tbody>
+          <tr>
+            <!-- <td><button type="Submit"
+                            class="btn btn-primary btn-block">Submitaa</button>
+
+
+                </td>-->
+
+            <td>
+              <button
+                type="button"
+                class="btn btn-success"
+                onclick="submitOutingForm();"
+              >
+                SUBMIT
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>
