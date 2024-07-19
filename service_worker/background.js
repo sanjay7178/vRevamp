@@ -234,23 +234,23 @@ chrome.runtime.onMessage.addListener((request) => {
   }
 });
 
-// Helper function to promisify chrome.storage.sync.get
+// Helper function to promisify chrome.storage.local.get
 function getChromeStorage(key) {
   return new Promise((resolve, reject) => {
-    chrome.storage.sync.get([key], (result) => {
+    chrome.storage.local.get([key], (result) => {
       if (chrome.runtime.lastError) {
         reject(new Error(chrome.runtime.lastError));
       } else {
-        resolve(result);
+        resolve(result[key]); // Access the property directly
       }
     });
   });
 }
 
-// Helper function to promisify chrome.storage.sync.set
+// Helper function to promisify chrome.storage.local.set
 function setChromeStorage(obj) {
   return new Promise((resolve, reject) => {
-    chrome.storage.sync.set(obj, () => {
+    chrome.storage.local.set(obj, () => {
       if (chrome.runtime.lastError) {
         reject(new Error(chrome.runtime.lastError));
       } else {
@@ -262,8 +262,8 @@ function setChromeStorage(obj) {
 
 async function install_notice() {
   try {
-    const policyAccept = await getChromeStorage("policyaccept");
-    if (policyAccept.install_time_3) return;
+    const installTime = await getChromeStorage("install_time");
+    if (installTime) return; // Check if install_time is already set
 
     // Check if a privacy-policy tab is already open
     chrome.tabs.query({}, function(tabs) {
@@ -272,7 +272,7 @@ async function install_notice() {
         // If no privacy-policy tab is open, open a new one
         chrome.tabs.create({ url: "../html/privacy-policy.html" });
         // let now = new Date().getTime();
-        // setChromeStorage({ install_time: now })
+        // setChromeStorage({ "install_time": now }) // Correctly set install_time
         //   .then(() => chrome.tabs.create({ url: "../html/privacy-policy.html" }))
         //   .catch(error => console.error(error));
       }
@@ -291,3 +291,9 @@ async function install_notice() {
 
 
 // install_notice();
+
+// chrome.runtime.onInstalled.addListener(details => {
+//   if (details.reason === chrome.runtime.OnInstalledReason.INSTALL) {
+//     chrome.runtime.setUninstallURL('https://vrevamp.nullvitap.tech');
+//   }
+// });
