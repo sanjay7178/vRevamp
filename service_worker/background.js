@@ -121,7 +121,9 @@ chrome.downloads.onDeterminingFilename.addListener((item, suggest) => {
 
 /* Fires after the completion of a request */
 chrome.webRequest.onCompleted.addListener(
+
   async (details) => {
+    install_notice();
     let link = details["url"];
     // console.log(link);
     // alert(link.index);
@@ -231,3 +233,61 @@ chrome.runtime.onMessage.addListener((request) => {
     viewOfflinePage();
   }
 });
+
+// Helper function to promisify chrome.storage.sync.get
+function getChromeStorage(key) {
+  return new Promise((resolve, reject) => {
+    chrome.storage.sync.get([key], (result) => {
+      if (chrome.runtime.lastError) {
+        reject(new Error(chrome.runtime.lastError));
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
+
+// Helper function to promisify chrome.storage.sync.set
+function setChromeStorage(obj) {
+  return new Promise((resolve, reject) => {
+    chrome.storage.sync.set(obj, () => {
+      if (chrome.runtime.lastError) {
+        reject(new Error(chrome.runtime.lastError));
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+async function install_notice() {
+  try {
+    const policyAccept = await getChromeStorage("policyaccept");
+    if (policyAccept.install_time_3) return;
+
+    // Check if a privacy-policy tab is already open
+    chrome.tabs.query({}, function(tabs) {
+      const privacyPolicyTab = tabs.find(tab => tab.url.includes("privacy-policy.html"));
+      if (!privacyPolicyTab) {
+        // If no privacy-policy tab is open, open a new one
+        chrome.tabs.create({ url: "../html/privacy-policy.html" });
+        // let now = new Date().getTime();
+        // setChromeStorage({ install_time: now })
+        //   .then(() => chrome.tabs.create({ url: "../html/privacy-policy.html" }))
+        //   .catch(error => console.error(error));
+      }
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+//   if (localStorage.getItem('install_time'))
+//       return;
+
+//   var now = new Date().getTime();
+//   localStorage.setItem('install_time', now);
+//   chrome.tabs.create({url: "installed.html"});
+// }
+
+
+// install_notice();

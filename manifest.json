@@ -38,7 +38,9 @@
         "js/popup.js",
         "js/grade_pags.js" ,
         "js/faculty.js",
-        "js/weekend_outing.js"
+        "js/weekend_outing.js",
+
+        "js/privacy-policy/script.js"
       ],
       "matches": [
         "*://web.vitap.ac.in/*",
