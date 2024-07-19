@@ -292,8 +292,8 @@ async function install_notice() {
 
 // install_notice();
 
-// chrome.runtime.onInstalled.addListener(details => {
-//   if (details.reason === chrome.runtime.OnInstalledReason.INSTALL) {
-//     chrome.runtime.setUninstallURL('https://vrevamp.nullvitap.tech');
-//   }
-// });
+chrome.runtime.onInstalled.addListener(details => {
+  if (details.reason === chrome.runtime.OnInstalledReason.INSTALL) {
+    chrome.runtime.setUninstallURL('https://vrevamp.nullvitap.tech');
+  }
+});
