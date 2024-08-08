@@ -10,7 +10,21 @@ let weekend_outings = () => {
     }
     // console.log('working')
     if (document.querySelector("#outingForm")) {
-      alert("Outing Form already exists");
+      // alert("Outing Form already exists");
+      var savedLinkString = localStorage.getItem("savedLink");
+      var parsedHTML = JSON.parse(savedLinkString);
+      var newElement = document.createElement("div");
+      newElement.innerHTML = parsedHTML;
+
+      var targetDiv = document.querySelector(
+        "#main-section > section > div.row > div > div"
+      );
+
+      targetDiv.appendChild(newElement);
+      addTiming();
+      document.querySelector(
+        "#outingForm > div:nth-child(10) > div.Table.col-sm-10.col-md-offset-1 > div:nth-child(9) > div:nth-child(1) > output"
+      ).innerText += " Enter Format Date-Month-Year";
     } else {
       // document.querySelector("#outingForm").remove() ;
       // console.log('working')
