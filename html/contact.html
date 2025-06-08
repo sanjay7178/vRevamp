@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>vRevamp Extension — Contact Us</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #000;
+      color: #fff;
+      line-height: 1.6;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h1, h2 {
+      color: #f0f0f0;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      background-color: #111;
+      border: 1px solid #333;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 1rem;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: #000;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    .contact-info ul {
+      list-style: none;
+      padding: 0;
+    }
+    .contact-info li {
+      margin-bottom: 8px;
+    }
+    a {
+      color: #4CAF50;
+    }
+  </style>
+</head>
+<body>
+  <h1>Contact Us</h1>
+
+  <div class="section">
+    <p>
+      Have questions, feedback, or need support with the vRevamp Chrome Extension?
+      We’re here to help! Fill out the form below or reach us directly via email.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Send Us a Message</h2>
+    <form action="https://your-server.com/contact" method="POST">
+      <label for="name">Name <small>(optional)</small></label>
+      <input type="text" id="name" name="name" placeholder="Your name" />
+
+      <label for="email">Email <small>(required)</small></label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="you@example.com"
+        required
+      />
+
+      <label for="message">Message <small>(required)</small></label>
+      <textarea
+        id="message"
+        name="message"
+        placeholder="How can we help you?"
+        required
+      ></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+
+  <div class="section contact-info">
+    <h2>Other Ways to Reach Us</h2>
+    <ul>
+      <li>
+        <strong>Email:</strong>
+        <a href="mailto:immortal6805@gmail.com"
+          >immortal6805@gmail.com</a
+        >
+      </li>
+      <li>
+        <strong>Website:</strong>
+        <a href="" target="_blank"
+          ></a
+        >
+      </li>
+      <li>
+
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p>
+      We aim to respond to all inquiries within 1–2 business days. Thank you for
+      using vRevamp!
+    </p>
+  </div>
+</body>
+</html>
