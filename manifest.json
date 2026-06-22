@@ -38,7 +38,7 @@
         "js/navbarcc.js",
         "js/navbarap.js",
         "js/popup.js",
-        "js/grade_pags.js" ,
+        "js/grade_page.js" ,
         "js/faculty.js",
         "js/weekend_outing.js"
       ],
