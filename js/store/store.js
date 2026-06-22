@@ -7,7 +7,7 @@ const store = chrome.storage.local;
  * @param {Object} data - The data to be saved in Chrome storage
  * @returns {void}
 */
-function saveData(key, data) {
+function saveData(key, data, callback) {
   const d = {};
   d[key] = data;
   store.set(d, () => {
@@ -16,6 +16,7 @@ function saveData(key, data) {
     } else {
       console.log("Data saved successfully!");
     }
+    if (callback) callback();
   });
 }
 

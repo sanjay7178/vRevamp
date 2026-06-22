@@ -19,6 +19,7 @@
         "js/store/saveMarksPage.js",
         "js/store/saveExamSchedulePage.js",
         "js/store/saveAttendancePage.js",
+        "js/store/saveCreditsDetails.js",
 
         "js/outing/store.js",
         
@@ -26,6 +27,7 @@
         "js/timetable/createTimeTable.js",
         "js/timetable/parsersTimeTable.js",
         "js/timetable/timetable.js",
+        "js/timetable/creditsDetails.js",
         "js/attendance.js",
         "js/marks_page.js",
         "js/course_page.js",
