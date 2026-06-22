@@ -10,8 +10,6 @@ const GRADE_POINTS = {
   F: 0
 };
 
-// Cache grade map between ensureCreditsAndCalculate and loadCreditsAndCalculateGPA
-// to avoid extracting grades twice from the DOM
 let cachedGradeMap = null;
 
 function getCurrentSemester() {
@@ -20,7 +18,7 @@ function getCurrentSemester() {
     const semesterID = select.value;
     const semesterName = select.options[select.selectedIndex].text;
     if(semesterName==="-- Choose Semester --") return null;
-    console.log("Current Semester in Grades page:", semesterName); 
+    // console.log("Current Semester in Grades page:", semesterName); 
     return semesterID;
 }
 
@@ -33,14 +31,14 @@ function extractGradeMap() {
   for (let i = 2; i < rows.length; i++) { // skip header
     const cols = rows[i].querySelectorAll("td");
     
-    // Skip rows that don't have enough columns (e.g. loading rows, summary rows)
+    // Current VTOP grade table has 7 columns (excluding View Mark column)
     if (cols.length < 7) continue;
     
     const courseCode = cols[1].innerText.trim();
     const grade = cols[6].innerText.trim();
 
     gradeMap[courseCode] = grade;
-    console.log(`Extracted grade for ${courseCode}: ${grade}`);
+    // console.log(`Extracted grade for ${courseCode}: ${grade}`);
   }
 
   return gradeMap;
@@ -64,12 +62,10 @@ function calculateGPA(courseCodes, credits, gradeMap) {
 
   if (totalCredits === 0) return "-";
   const gpa = (numerator / totalCredits);
-  console.log(gpa);
+  // console.log(gpa);
   return gpa;
 }
 
-
-// Show a visually distinct loading row
 function showCalculatingMessage() {
   const tbody = document.querySelector("#studentGradeView table tbody");
   if (!tbody) return;
@@ -81,7 +77,7 @@ function showCalculatingMessage() {
   loadingRow.style.backgroundColor = "rgba(170,255,0,0.6)";
   loadingRow.innerHTML = '<td colspan="8" style="text-align:center;font-weight:bold">GPA: Calculating...</td>';
   tbody.appendChild(loadingRow);
-  console.log("GPA: Calculating...");
+  // console.log("GPA: Calculating...");
 }
 
 // Read credits from storage
@@ -89,44 +85,38 @@ function loadCreditsAndCalculateGPA() {
   const semester = getCurrentSemester();
   if (!semester) return;
 
-  // Use cached grade map if available (extracted earlier in ensureCreditsAndCalculate)
-  // to avoid redundant DOM queries. Cache is consumed after use.
+  // Use cached grade map if available
   let gradeMap = cachedGradeMap;
   cachedGradeMap = null;
 
   if (!gradeMap) {
-    // CRITICAL: Extract grades BEFORE modifying the table with loading row.
-    // extractGradeMap() queries ALL <tr> elements including any we add,
-    // and will crash if it encounters the loading row (which has only 1 <td>).
     try {
       gradeMap = extractGradeMap();
     } catch (e) {
-      console.error("GPA: Failed to extract grades:", e);
+      // console.error("GPA: Failed to extract grades:", e);
       return;
     }
   }
-  console.log("Grade Map:", gradeMap);
+  // console.log("Grade Map:", gradeMap);
 
-  // Show loading state for the async credit loading step
   showCalculatingMessage();
 
   getData("creditsBySemester", (data) => {
     if (!data || !data[semester]) {
-      console.log("Credits not found for semester:", semester);
-      // Remove the loading row so user isn't stuck with perpetual spinner
+      // console.log("Credits not found for semester:", semester);
       removeExistingGPARow();
       return;
     }
 
-    const { courseCodes, credits } = data[semester]; // courseCodes[], credits[] which were extracted from timetable
-    console.log("Course Codes:", courseCodes);
-    console.log("Credits:", credits);
+    const { courseCodes, credits } = data[semester];
+    // console.log("Course Codes:", courseCodes);
+    // console.log("Credits:", credits);
     
     let gpa;
     try {
       gpa = calculateGPA(courseCodes, credits, gradeMap);
     } catch (e) {
-      console.error("GPA: Calculation failed:", e);
+      // console.error("GPA: Calculation failed:", e);
       removeExistingGPARow();
       return;
     }
@@ -140,10 +130,8 @@ function renderGPA(gpa) {
   const tbody = document.querySelector("#studentGradeView table tbody");
   if(!tbody) return;
 
-  // Remove any existing GPA or loading row first (prevents duplicates)
   removeExistingGPARow();
 
-  // Handle NaN gracefully (e.g., when all courses have invalid/missing grades)
   const gpaDisplay = (typeof gpa === "number" && !isNaN(gpa)) ? gpa.toFixed(2) : "N/A";
 
   const gpaRow = document.createElement('tr');
@@ -151,11 +139,9 @@ function renderGPA(gpa) {
   gpaRow.style.backgroundColor = "rgba(170,255,0,0.6)";
   gpaRow.innerHTML = `<td colspan="8" style="text-align:center;font-weight:bold">GPA : ${gpaDisplay}</td>`
   tbody.appendChild(gpaRow);
-  console.log("GPA Rendered:", gpaDisplay);
+  // console.log("GPA Rendered:", gpaDisplay);
 }
 
-
-// Remove any existing GPA row by ID (used for deduplication)
 function removeExistingGPARow() {
   const existingRow = document.getElementById('vrevamp-gpa-row');
   if (existingRow) existingRow.remove();
@@ -163,50 +149,45 @@ function removeExistingGPARow() {
 
 // Listen for semester change
 function watchGradesPageSemesterChange() {
-  console.log("called watch semester change");
+  // console.log("called watch semester change");
   const select = document.getElementById("semesterSubId");
-  console.log(select);
+  // console.log(select);
   if (!select) return;
-  console.log("select found");
+  // console.log("select found");
   setTimeout(loadCreditsAndCalculateGPA, 1000); 
 }
 
 // Initialize Grade Page
 function initGradePage() {
-  console.log("Grade page initialized");
+  // console.log("Grade page initialized");
   watchGradesPageSemesterChange();
 }
 
 function ensureCreditsAndCalculate(semesterId){
-  // BUG FIX: Check if grade table has any records BEFORE attempting to fetch credits
   // This prevents opening hidden timetable popup when "No records found" is displayed
   const gradeMap = extractGradeMap();
   if (Object.keys(gradeMap).length === 0) {
-    console.log("No grades found in table, aborting credit fetch");
+    // console.log("No grades found in table, aborting credit fetch");
     return;
   }
 
-  // Cache grade map so loadCreditsAndCalculateGPA can reuse it (avoids double extraction)
   cachedGradeMap = gradeMap;
 
   getData('creditsBySemester',(data)=>{
     if(data && data[semesterId]){
-      // Validate stored course codes actually match this semester's grade page courses
+      // Validate stored course codes match this semester's grade page courses
       const stored = data[semesterId];
       const hasMatch = Array.isArray(stored.courseCodes) &&
         stored.courseCodes.some(code => gradeMap[code] !== undefined);
       
       if (hasMatch) {
-        console.log("Credits already available and match grade page");
-        // Show loading immediately while waiting for the 1-second setTimeout in initGradePage
+        // console.log("Credits already available and match grade page");
         showCalculatingMessage();
         initGradePage();
         return;
       }
 
-      // Stored credits don't match — likely stale data from a different semester.
-      // Delete the invalid entry and re-fetch fresh credits from timetable.
-      console.log("Stored credits don't match current semester's courses, re-fetching");
+      // console.log("Stored credits don't match current semester's courses, re-fetching");
       delete data[semesterId];
       saveData("creditsBySemester", data, () => {
         showCalculatingMessage();
@@ -217,8 +198,8 @@ function ensureCreditsAndCalculate(semesterId){
       });
       return;
     }
-    console.log("Credits missing, requesting fetch");
-    // Show loading state immediately so user knows calculation is in progress
+    // console.log("Credits missing, requesting fetch");
+    
     showCalculatingMessage();
     chrome.runtime.sendMessage({
       message: "fetch_credits_for_semester",
@@ -238,7 +219,7 @@ chrome.runtime.onMessage.addListener((request) => {
 
 chrome.runtime.onMessage.addListener((request)=>{
   if(request.message === "credits_ready"){
-    console.log("Credits ready for semester:", request.semesterId ?? "(not provided)");
+    // console.log("Credits ready for semester:", request.semesterId ?? "(not provided)");
     initGradePage();
   }
 })

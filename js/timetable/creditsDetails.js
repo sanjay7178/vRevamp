@@ -3,7 +3,7 @@ function getCurrentSemesterID() {
     if (!select) return null;
     const semesterID = select.value;
     const semesterName = select.options[select.selectedIndex].text;
-    console.log("Current Semester in Timetable:", semesterName);
+    // console.log("Current Semester in Timetable:", semesterName);
     return semesterID;
 }
 
@@ -33,43 +33,39 @@ function extractCreditsData(rows) {
         credits.push(Number(match[1]));
     }
 
-    // BUG FIX #3 & #7: Explicit extraction failure handling
     if (!courseCodes.length || !credits.length) {
-        console.log("No credits extracted");
-        // Send failure message to background worker
+        // console.log("No credits extracted");
         chrome.runtime.sendMessage({
             message: "credits_failed",
             reason: "No credits extracted from table"
         });
-        console.log("Sent credits_failed message");
+        // console.log("Sent credits_failed message");
         return null;
     }
 
-    console.log("Extracted courseCodes:", courseCodes);
-    console.log("Extracted credits:", credits);
+    // console.log("Extracted courseCodes:", courseCodes);
+    // console.log("Extracted credits:", credits);
     const semester = getCurrentSemesterID();
     
     // Store credits and wait for confirmation before notifying background
     storeCreditsArrays(semester, courseCodes, credits, () => {
-        // Credits are now safely stored, notify background
-        console.log("Credits storage confirmed, sending credits_stored message");
+        // console.log("Credits storage confirmed, sending credits_stored message");
         chrome.runtime.sendMessage({
             message: "credits_stored",
             semester,
             success: true
         });
-        console.log("Sent credits_stored message for semester:", semester);
+        // console.log("Sent credits_stored message for semester:", semester);
     });
 }
 
-// 
 function extractCreditsDetails() {
     const tableBody = document.querySelector("#studentDetailsList .table-responsive .table tbody");
     if (!tableBody) {
-        console.log("Credits table body not found");
+        // console.log("Credits table body not found");
         return;
     }
-    console.log(tableBody);
+    // console.log(tableBody);
     const rows = tableBody.querySelectorAll('tr');
     extractCreditsData(rows);
 };
@@ -78,13 +74,13 @@ function watchTimetableSemesterChange() {
     const select = document.getElementById("semesterSubId");
     if (!select) return;
     select.addEventListener("change", () => {
-        console.log("semester change in timetable");
+        // console.log("semester change in timetable");
         setTimeout(extractCreditsDetails, 1000);
     });
 }
 
 function initTimetablePage() {
-    console.log("timetable page initialized")
+    // console.log("timetable page initialized")
     watchTimetableSemesterChange();
 }
 
@@ -97,21 +93,18 @@ function waitForCreditsTable(expectedSemesterId, callback, timeout = 20000) {
             "#studentDetailsList .table-responsive .table tbody tr"
         );
 
-        // Ensure:
-        // 1. Correct semester
-        // 2. Enough rows (headers + data)
         if (
             currentSemester === expectedSemesterId &&
             rows.length > 4
         ) {
             observer.disconnect();
-            console.log("Credits table ready for semester:", expectedSemesterId);
+            // console.log("Credits table ready for semester:", expectedSemesterId);
             callback(rows);
         }
 
         if (Date.now() - start > timeout) {
             observer.disconnect();
-            console.log("Credits table wait timeout");
+            // console.log("Credits table wait timeout");
         }
     });
 
@@ -129,17 +122,16 @@ function openTimetableFromMenu(callback, attempts = 0) {
 
     if (!timetableLink) {
         if (attempts > 10) {
-            console.log("Timetable menu not found");
+            // console.log("Timetable menu not found");
             return;
         }
         setTimeout(() => openTimetableFromMenu(callback, attempts + 1), 500);
         return;
     }
 
-    console.log("Clicking Timetable menu");
+    // console.log("Clicking Timetable menu");
     timetableLink.click();
-
-    // Give VTOP time to load timetable DOM
+    
     setTimeout(callback, 1000);
 }
 
@@ -158,7 +150,7 @@ function selectSemesterAndFetchCredits(semesterId, attempts = 0) {
         .some(opt => opt.value === semesterId);
 
     if (!optionExists) {
-        console.log("Semester option not found:", semesterId);
+        // console.log("Semester option not found:", semesterId);
         return;
     }
 
@@ -167,7 +159,7 @@ function selectSemesterAndFetchCredits(semesterId, attempts = 0) {
     // Trigger VTOP AJAX
     select.dispatchEvent(new Event("change", { bubbles: true }));
 
-    console.log("Semester selected in timetable:", semesterId);
+    // console.log("Semester selected in timetable:", semesterId);
     waitForCreditsTable(semesterId, (rows) => {
         extractCreditsData(rows);
     });
@@ -183,9 +175,9 @@ chrome.runtime.onMessage.addListener((request) => {
 
 chrome.runtime.onMessage.addListener((request) => {
     if (request.message === "open_timetable_and_select_semester") {
-        console.log("received open timetable msg with semesterId:", request.semesterId)
+        // console.log("received open timetable msg with semesterId:", request.semesterId)
         openTimetableFromMenu(() => {
-            console.log("Calling selectSemesterAndFetchCredits with semesterId:", request.semesterId);
+            // console.log("Calling selectSemesterAndFetchCredits with semesterId:", request.semesterId);
             selectSemesterAndFetchCredits(request.semesterId);
         });
     }

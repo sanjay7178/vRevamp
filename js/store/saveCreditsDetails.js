@@ -13,7 +13,7 @@ function storeCreditsArrays(semester, courseCodes, credits, callback) {
     };
 
     saveData("creditsBySemester", allCredits, () => {
-      console.log("Credits stored for semester:", semester);
+      // console.log("Credits stored for semester:", semester);
       if (callback) callback();
     });
   });
