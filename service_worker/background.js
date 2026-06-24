@@ -131,7 +131,7 @@ chrome.webRequest.onCompleted.addListener(
     if (link.indexOf("doStudentMarkView") !== -1) {
       // console.log("mark_view");
       returnMessage("mark_view_page");
-    } else if (link.indexOf("StudentTimeTable") !== -1) {
+    } else if (link.indexOf("StudentTimeTable") !== -1 || link.indexOf("processViewTimeTable") !== -1) {
       // console.log("timetable_view_page");
       returnMessage("timetable_view_page");
     } else if (
