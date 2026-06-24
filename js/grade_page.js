@@ -10,16 +10,19 @@ const GRADE_POINTS = {
   F: 0
 };
 
-let cachedGradeMap = null;
+// VTOP timetable API endpoint — kept as a constant for visibility.
+// Update here if the domain or endpoint path changes.
+const VTOP_TIMETABLE_API = "https://vtop.vitap.ac.in/vtop/processViewTimeTable";
+
 let isFetchingCredits = false;
 
-function getCurrentSemester() {
+function getCurrentSemesterId() {
   const select = document.getElementById("semesterSubId");
     if (!select) return null;
     const semesterID = select.value;
     const semesterName = select.options[select.selectedIndex].text;
     if(semesterName==="-- Choose Semester --") return null;
-    // console.log("Current Semester in Grades page:", semesterName); 
+    // console.log("Current Semester in Grades page:", semesterName);
     return semesterID;
 }
 
@@ -31,10 +34,10 @@ function extractGradeMap() {
 
   for (let i = 2; i < rows.length; i++) { // skip header
     const cols = rows[i].querySelectorAll("td");
-    
+
     // Current VTOP grade table has 7 columns (excluding View Mark column)
     if (cols.length < 7) continue;
-    
+
     const courseCode = cols[1].innerText.trim();
     const grade = cols[6].innerText.trim();
 
@@ -82,13 +85,12 @@ function showCalculatingMessage() {
 }
 
 // Read credits from storage
-function loadCreditsAndCalculateGPA() {
-  const semester = getCurrentSemester();
-  if (!semester) return;
+function loadCreditsAndCalculateGPA(gradeMapOverride) {
+  const semesterId = getCurrentSemesterId();
+  if (!semesterId) return;
 
-  // Use cached grade map if available
-  let gradeMap = cachedGradeMap;
-  cachedGradeMap = null;
+  // Use provided grade map, or extract from DOM
+  let gradeMap = gradeMapOverride || null;
 
   if (!gradeMap) {
     try {
@@ -103,16 +105,16 @@ function loadCreditsAndCalculateGPA() {
   showCalculatingMessage();
 
   getData("creditsBySemester", (data) => {
-    if (!data || !data[semester]) {
-      // console.log("Credits not found for semester:", semester);
+    if (!data || !data[semesterId]) {
+      // console.log("Credits not found for semester:", semesterId);
       removeExistingGPARow();
       return;
     }
 
-    const { courseCodes, credits } = data[semester];
+    const { courseCodes, credits } = data[semesterId];
     // console.log("Course Codes:", courseCodes);
     // console.log("Credits:", credits);
-    
+
     let gpa;
     try {
       gpa = calculateGPA(courseCodes, credits, gradeMap);
@@ -148,22 +150,6 @@ function removeExistingGPARow() {
   if (existingRow) existingRow.remove();
 }
 
-// Listen for semester change
-function watchGradesPageSemesterChange() {
-  // console.log("called watch semester change");
-  const select = document.getElementById("semesterSubId");
-  // console.log(select);
-  if (!select) return;
-  // console.log("select found");
-  setTimeout(loadCreditsAndCalculateGPA, 1000); 
-}
-
-// Initialize Grade Page
-function initGradePage() {
-  // console.log("Grade page initialized");
-  watchGradesPageSemesterChange();
-}
-
 
 // Helpers for VTOP API call
 function getCsrfToken() {
@@ -192,8 +178,8 @@ function getRegisterNumber() {
 }
 
 
-// Direct timetable API fetch (replaces hidden window)
-async function fetchCreditsFromTimetableAPI(semesterId) {
+// Direct timetable API fetch
+async function fetchCreditsFromTimetableAPI(semesterId, gradeMap) {
   if (isFetchingCredits) {
     // console.log("Already fetching credits, skipping");
     return;
@@ -205,7 +191,7 @@ async function fetchCreditsFromTimetableAPI(semesterId) {
     const regNo = getRegisterNumber();
 
     const response = await fetch(
-      "https://vtop.vitap.ac.in/vtop/processViewTimeTable",
+      VTOP_TIMETABLE_API,
       {
         method: "POST",
         headers: {
@@ -234,44 +220,17 @@ async function fetchCreditsFromTimetableAPI(semesterId) {
       "#studentDetailsList .table-responsive .table tbody tr"
     );
 
-    if (rows.length < 5) {
+    const result = extractCreditsFromTableRows(rows);
+    if (!result) {
       // console.log("No credits data in response");
       showGPAAfterFetchFailure();
       return;
     }
 
-    const courseCodes = [];
-    const credits = [];
-
-    // Skip headers (rows 0-1) & footer (last 2 rows)
-    for (let i = 2; i < rows.length - 2; i++) {
-      const cols = rows[i].querySelectorAll("td");
-      if (cols.length < 4) continue;
-
-      const courseText = cols[2].innerText.trim();
-      const dashIndex = courseText.indexOf("-");
-      if (dashIndex === -1) continue;
-
-      const courseCode = courseText.substring(0, dashIndex).trim();
-
-      const creditText = cols[3].innerText.trim();
-      const match = creditText.match(/(\d+)\.\d+/);
-      if (!match) continue;
-
-      courseCodes.push(courseCode);
-      credits.push(Number(match[1]));
-    }
-
-    if (!courseCodes.length || !credits.length) {
-      // console.log("No credits extracted from timetable API");
-      showGPAAfterFetchFailure();
-      return;
-    }
-
     // Store credits in chrome.storage.local
-    storeCreditsArrays(semesterId, courseCodes, credits, () => {
+    storeCreditsArrays(semesterId, result.courseCodes, result.credits, () => {
       // console.log("Credits stored successfully for semester:", semesterId);
-      loadCreditsAndCalculateGPA();
+      loadCreditsAndCalculateGPA(gradeMap);
     });
 
   } catch (e) {
@@ -296,7 +255,7 @@ function showGPAAfterFetchFailure() {
 }
 
 
-// Credit orchestration (modified to use direct API)
+// Credit orchestration
 function ensureCreditsAndCalculate(semesterId) {
   // Don't proceed if no grades are displayed
   const gradeMap = extractGradeMap();
@@ -304,8 +263,6 @@ function ensureCreditsAndCalculate(semesterId) {
     // console.log("No grades found in table, aborting credit fetch");
     return;
   }
-
-  cachedGradeMap = gradeMap;
 
   getData('creditsBySemester', (data) => {
     if (data && data[semesterId]) {
@@ -316,8 +273,7 @@ function ensureCreditsAndCalculate(semesterId) {
 
       if (hasMatch) {
         // console.log("Credits already available and match grade page");
-        showCalculatingMessage();
-        initGradePage();
+        loadCreditsAndCalculateGPA(gradeMap);
         return;
       }
 
@@ -325,24 +281,22 @@ function ensureCreditsAndCalculate(semesterId) {
       delete data[semesterId];
       saveData("creditsBySemester", data, () => {
         showCalculatingMessage();
-        fetchCreditsFromTimetableAPI(semesterId);
+        fetchCreditsFromTimetableAPI(semesterId, gradeMap);
       });
       return;
     }
 
     // console.log("Credits missing, fetching from timetable API");
     showCalculatingMessage();
-    fetchCreditsFromTimetableAPI(semesterId);
+    fetchCreditsFromTimetableAPI(semesterId, gradeMap);
   });
 }
 
 // Message listeners
 chrome.runtime.onMessage.addListener((request) => {
   if (request.message === "exam_grade") {
-    const semesterId = getCurrentSemester();
+    const semesterId = getCurrentSemesterId();
     if(semesterId===null) return;
     ensureCreditsAndCalculate(semesterId);
   }
 });
-
-
