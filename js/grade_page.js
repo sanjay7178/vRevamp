@@ -266,23 +266,8 @@ function ensureCreditsAndCalculate(semesterId) {
 
   getData('creditsBySemester', (data) => {
     if (data && data[semesterId]) {
-      // Validate stored course codes match this semester's grade page courses
-      const stored = data[semesterId];
-      const hasMatch = Array.isArray(stored.courseCodes) &&
-        stored.courseCodes.some(code => gradeMap[code] !== undefined);
-
-      if (hasMatch) {
-        // console.log("Credits already available and match grade page");
-        loadCreditsAndCalculateGPA(gradeMap);
-        return;
-      }
-
-      // console.log("Stored credits don't match current semester's courses, re-fetching");
-      delete data[semesterId];
-      saveData("creditsBySemester", data, () => {
-        showCalculatingMessage();
-        fetchCreditsFromTimetableAPI(semesterId, gradeMap);
-      });
+      // console.log("Credits already available for semester:", semesterId);
+      loadCreditsAndCalculateGPA(gradeMap);
       return;
     }
 
