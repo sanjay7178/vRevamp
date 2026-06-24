@@ -13,6 +13,7 @@
         "js/modules/dom-to-image.js",
         "js/utils/chooseCurrentSem.js",
         "js/utils/filterRepeated.js",
+        "js/utils/extractCredits.js",
 
         "js/store/store.js",
         "js/store/saveTimeTableDetails.js",
