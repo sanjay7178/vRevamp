@@ -28,7 +28,6 @@
         "js/timetable/createTimeTable.js",
         "js/timetable/parsersTimeTable.js",
         "js/timetable/timetable.js",
-        "js/timetable/creditsDetails.js",
         "js/attendance.js",
         "js/marks_page.js",
         "js/course_page.js",
