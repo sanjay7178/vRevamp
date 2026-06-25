@@ -20,7 +20,6 @@
         "js/store/saveMarksPage.js",
         "js/store/saveExamSchedulePage.js",
         "js/store/saveAttendancePage.js",
-        "js/store/saveCreditsDetails.js",
 
         "js/outing/store.js",
         
