@@ -1,4 +1,4 @@
-const VALID_GRADES = ["S", "A", "B", "C", "D", "E", "F"];
+const VALID_GRADES = ["S", "A", "B", "C", "D", "E", "F", "N"];
 
 const GRADE_POINTS = {
   S: 10,
@@ -7,23 +7,26 @@ const GRADE_POINTS = {
   C: 7,
   D: 6,
   E: 5,
-  F: 0
+  F: 0,
+  N: 0
 };
-
-// VTOP timetable API endpoint — kept as a constant for visibility.
-// Update here if the domain or endpoint path changes.
-const VTOP_TIMETABLE_API = "https://vtop.vitap.ac.in/vtop/processViewTimeTable";
 
 let isFetchingCredits = false;
 
 function getCurrentSemesterId() {
   const select = document.getElementById("semesterSubId");
-    if (!select) return null;
-    const semesterID = select.value;
-    const semesterName = select.options[select.selectedIndex].text;
-    if(semesterName==="-- Choose Semester --") return null;
-    // console.log("Current Semester in Grades page:", semesterName);
-    return semesterID;
+  if (!select) return null;
+
+  const semesterID = select.value;
+
+  const selectedOption = select.options[select.selectedIndex];
+  if (!selectedOption) return null;
+
+  const semesterName = selectedOption.text;
+  if (semesterName === "-- Choose Semester --") return null;
+
+  // console.log("Current Semester in Grades page:", semesterName);
+  return semesterID;
 }
 
 // Extract grades from table
@@ -191,7 +194,7 @@ async function fetchCreditsFromTimetableAPI(semesterId, gradeMap) {
     const regNo = getRegisterNumber();
 
     const response = await fetch(
-      VTOP_TIMETABLE_API,
+      `${window.location.origin}/vtop/processViewTimeTable`,
       {
         method: "POST",
         headers: {
