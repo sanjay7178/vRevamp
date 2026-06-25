@@ -24,7 +24,7 @@ function extractCreditsFromTableRows(rows) {
     const courseCode = courseText.substring(0, dashIndex).trim();
 
     const creditText = cols[3].innerText.trim();
-    const match = creditText.match(/(\d+)\.\d+/);
+    const match = creditText.match(/(\d+\.\d+)$/);
     if (!match) continue;
 
     courseCodes.push(courseCode);
