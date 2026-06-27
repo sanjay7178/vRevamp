@@ -1,17 +1,23 @@
+let viewOfflineButton = document.getElementById("view-offline");
+let extensionVersion = document.getElementById("extension-version");
 
-let viewOfflineButton = document.getElementById("view-offline")
+if (extensionVersion) {
+  extensionVersion.textContent = `v${chrome.runtime.getManifest().version}`;
+}
 
-viewOfflineButton.addEventListener("click", ()=>{
+if (viewOfflineButton) {
+  viewOfflineButton.addEventListener("click", () => {
     chrome.runtime.sendMessage({
-        message: "showOfflinePage",
-    });  
-});
+      message: "showOfflinePage",
+    });
+  });
+}
 
 // logout.style.display="none";
 // login.addEventListener("click",()=>{
 //     chrome.runtime.sendMessage({
 //         message: "login",
-//     });  
+//     });
 //     window.close();
 // });
 
