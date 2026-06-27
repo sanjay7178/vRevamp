@@ -215,7 +215,7 @@ let exam_schedule_sync = () => {
       // console.log(start_time, end_time);
       fetch(
         // test key (it's invalid)
-        "https://www.googleapis.com/calendar/v3/calendars/primary/events?sendUpdates=all&sendNotifications=true&alt=json&key=AIzaSyCPBz-DTZdoTLQ_ZiqsVUO520XItcomTn0",
+        "https://www.googleapis.com/calendar/v3/calendars/primary/events?sendUpdates=all&sendNotifications=true&alt=json&key=",
         {
           method: "POST",
           headers: {

@@ -11,7 +11,7 @@ const VTOP_URLS = [
   "*://vtop.vitap.ac.in/*",
 ];
 
-const API_KEY = "AIzaSyAXTXcZx8zuDZl2qRdDqzkqi5nEpjDBwWg";
+const API_KEY = "";
 
 chrome.runtime.onMessage.addListener((request) => {
   if (request.message === "table_name") {
@@ -151,8 +151,6 @@ chrome.webRequest.onCompleted.addListener(
       returnMessage("vtop2_captcha");
     } else if (link.indexOf("hrms/employeeSearchForStudent") !== -1) {
       returnMessage("employee_search");
-    } else if (link.indexOf("hostel/StudentWeekendOuting") !== -1) {
-      returnMessage("weekend_outings");
     } else if (
       link.indexOf("vtop/doLogin") !== -1 ||
       link.indexOf("assets/img/favicon.png") !== -1 ||

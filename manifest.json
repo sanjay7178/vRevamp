@@ -21,8 +21,6 @@
         "js/store/saveExamSchedulePage.js",
         "js/store/saveAttendancePage.js",
 
-        "js/outing/store.js",
-        
         "js/showOfflineIcon.js",
         "js/timetable/createTimeTable.js",
         "js/timetable/parsersTimeTable.js",
