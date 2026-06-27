@@ -21,7 +21,7 @@ function calendar(date, course_code, course_name, token, time) {
   // return new Promise((resolve, reject) => {
 
   fetch(
-    `https://www.googleapis.com/calendar/v3/calendars/primary/events?sendUpdates=all&sendNotifications=true&alt=json&key=AIzaSyCPBz-DTZdoTLQ_ZiqsVUO520XItcomTn0`,
+    `https://www.googleapis.com/calendar/v3/calendars/primary/events?sendUpdates=all&sendNotifications=true&alt=json&key=`,
     {
       method: "POST",
       headers: {
