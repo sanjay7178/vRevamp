@@ -16,7 +16,7 @@ function saveData(key, data, callback) {
     } else {
       console.log("Data saved successfully!");
     }
-    if (callback) callback();
+    callback?.(); // check if callback is optional 
   });
 }
 
