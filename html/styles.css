@@ -11,8 +11,25 @@ body {
 h2 {
     color: #c0caf5;
     margin-top: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 6px;
     text-align: center;
+}
+
+.header {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.version-badge {
+    display: inline-block;
+    color: #7dcfff;
+    background-color: #24283b;
+    border: 1px solid #292e42;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+    padding: 5px 9px;
 }
 
 .button-container,
@@ -30,10 +47,6 @@ h2 {
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 100%;
-}
-
-.header {
     width: 100%;
 }
 
@@ -103,77 +116,72 @@ h2 {
 }
 
 .action-btn,
-.login-with-google-btn,
-.wifi-button {
+.offline-btn {
     width: 90%;
     transition:
         background-color 0.3s,
         transform 0.1s,
         box-shadow 0.3s;
-    .action-btn, .offline-btn {
-      width: 90%;
-      transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
-      padding: 12px 16px;
-      border: none;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-    }
+    padding: 12px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
 
-    .action-btn {
-      background-color: #7dcfff;
-      color: #1a1b26;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
+.action-btn {
+    background-color: #7dcfff;
+    color: #1a1b26;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
-    .action-btn:hover {
-      background-color: #b4f9f8;
-    }
+.action-btn:hover {
+    background-color: #b4f9f8;
+}
 
-    .action-btn.secondary {
-      background-color: #f7768e;
-      color: #1a1b26;
-    }
+.action-btn.secondary {
+    background-color: #f7768e;
+    color: #1a1b26;
+}
 
-    .action-btn.secondary:hover {
-      background-color: #ff9e64;
-    }
+.action-btn.secondary:hover {
+    background-color: #ff9e64;
+}
 
-    .offline-btn {
-      background-color: #24283b;
-      color: #a9b1d6;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-left: 42px;
-      position: relative;
-      border: 1px solid #292e42;
-    }
+.offline-btn {
+    background-color: #24283b;
+    color: #a9b1d6;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 42px;
+    position: relative;
+    border: 1px solid #292e42;
+}
 
-    .offline-btn::before {
-      content: "";
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 18px;
-      height: 18px;
-      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNhOWIxZDYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS13aWZpLW9mZiI+PHBhdGggZD0iTTEyIDIwaC4wMSIvPjxwYXRoIGQ9Ik04LjUgMTYuNDI5YTUgNSAwIDAgMSA3IDAiLz48cGF0aCBkPSJNNSAxMi44NTlhMTAgMTAgMCAwIDEgNS4xNy0yLjY5Ii8+PHBhdGggZD0iTTE5IDEyLjg1OWExMCAxMCAwIDAgMC0yLjAwNy0xLjUyMyIvPjxwYXRoIGQ9Ik0yIDguODJhMTUgMTUgMCAwIDEgNC4xNzctMi42NDMiLz48cGF0aCBkPSJNMjIgOC44MmExNSAxNSAwIDAgMC0xMS4yODgtMy43NjQiLz48cGF0aCBkPSJtMiAyIDIwIDIwIi8+PC9zdmc+);
-      background-repeat: no-repeat;
-    }
+.offline-btn::before {
+    content: "";
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNhOWIxZDYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS13aWZpLW9mZiI+PHBhdGggZD0iTTEyIDIwaC4wMSIvPjxwYXRoIGQ9Ik04LjUgMTYuNDI5YTUgNSAwIDAgMSA3IDAiLz48cGF0aCBkPSJNNSAxMi44NTlhMTAgMTAgMCAwIDEgNS4xNy0yLjY5Ii8+PHBhdGggZD0iTTE5IDEyLjg1OWExMCAxMCAwIDAgMC0yLjAwNy0xLjUyMyIvPjxwYXRoIGQ9Ik0yIDguODJhMTUgMTUgMCAwIDEgNC4xNzctMi42NDMiLz48cGF0aCBkPSJNMjIgOC44MmExNSAxNSAwIDAgMC0xMS4yODgtMy43NjQiLz48cGF0aCBkPSJtMiAyIDIwIDIwIi8+PC9zdmc+);
+    background-repeat: no-repeat;
+}
 
-    .offline-btn:hover {
-      background-color: #292e42;
-    }
+.offline-btn:hover {
+    background-color: #292e42;
+}
 
-    .offline-btn:focus, .action-btn:focus {
-      outline: none;
-      box-shadow: 0 0 0 2px #7dcfff;
-    }
-
-
+.offline-btn:focus,
+.action-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #7dcfff;
+}
 
 #status-message {
     color: #f7768e;
