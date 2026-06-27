@@ -132,6 +132,7 @@ chrome.webRequest.onCompleted.addListener(
       // console.log("mark_view");
       returnMessage("mark_view_page");
     } else if (link.indexOf("StudentTimeTable") !== -1) {
+      // console.log("timetable_view_page");
       returnMessage("timetable_view_page");
     } else if (
       link.indexOf("processViewStudentAttendance") !== -1 ||
@@ -165,7 +166,10 @@ chrome.webRequest.onCompleted.addListener(
       // console.log("Exam Grade");
       returnMessage("exam_grade");
     } else if (link.indexOf("menu.js") !== -1 || link.indexOf("home") !== -1) {
-      if (link.indexOf("menu.js") !== -1) await sleep(3500);
+      if (link.indexOf("menu.js") !== -1) {
+        // sleep function not defined, use setTimeout instead
+        await new Promise(resolve => setTimeout(resolve, 3500));
+      }
       console.log("nav_bar_change");
       returnMessage("nav_bar_change");
     } else if (link.indexOf("examGradeView/getGradeViewDetail") != -1) {

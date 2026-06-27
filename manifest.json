@@ -13,6 +13,7 @@
         "js/modules/dom-to-image.js",
         "js/utils/chooseCurrentSem.js",
         "js/utils/filterRepeated.js",
+        "js/utils/extractCredits.js",
 
         "js/store/store.js",
         "js/store/saveTimeTableDetails.js",
@@ -36,7 +37,7 @@
         "js/navbarcc.js",
         "js/navbarap.js",
         "js/popup.js",
-        "js/grade_pags.js" ,
+        "js/grade_page.js" ,
         "js/faculty.js",
         "js/weekend_outing.js"
       ],

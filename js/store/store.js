@@ -7,7 +7,7 @@ const store = chrome.storage.local;
  * @param {Object} data - The data to be saved in Chrome storage
  * @returns {void}
 */
-function saveData(key, data) {
+function saveData(key, data, callback) {
   const d = {};
   d[key] = data;
   store.set(d, () => {
@@ -16,6 +16,7 @@ function saveData(key, data) {
     } else {
       console.log("Data saved successfully!");
     }
+    callback?.(); // check if callback is optional 
   });
 }
 
@@ -41,5 +42,26 @@ function getData(key, callback) {
         callback(null); // Notify callback function if doesn't exist
       }
     }
+  });
+}
+
+function storeCreditsArrays(semester, courseCodes, credits, callback) {
+  if (!semester || !courseCodes || !credits) {
+    if (callback) callback();
+    return;
+  }
+
+  getData("creditsBySemester", (existingData) => {
+    const allCredits = existingData || {};
+
+    allCredits[semester] = {
+      courseCodes,
+      credits
+    };
+
+    saveData("creditsBySemester", allCredits, () => {
+      // console.log("Credits stored for semester:", semester);
+      if (callback) callback();
+    });
   });
 }
